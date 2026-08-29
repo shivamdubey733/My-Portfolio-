@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Preview: Engineering Impact Metrics Strip — Shivam Dubey</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --primary: #f97316;
+      --primary-hover: #ea580c;
+      --font-sans: 'Plus Jakarta Sans', sans-serif;
+      --font-heading: 'Outfit', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    /* Theme Styles */
+    body.dark-theme {
+      background: #090d16;
+      color: #ffffff;
+      --bg-card: rgba(15, 23, 42, 0.85);
+      --bg-surface: #0f172a;
+      --border-color: rgba(255, 255, 255, 0.12);
+      --text-muted: #cbd5e1;
+      --text-subtle: #94a3b8;
+      --stat-number: #ffffff;
+      --stat-glow: rgba(249, 115, 22, 0.2);
+    }
+
+    body.light-theme {
+      background: #fffbf5;
+      color: #0f172a;
+      --bg-card: #ffffff;
+      --bg-surface: #f8fafc;
+      --border-color: rgba(0, 0, 0, 0.08);
+      --text-muted: #475569;
+      --text-subtle: #64748b;
+      --stat-number: #0f172a;
+      --stat-glow: rgba(249, 115, 22, 0.1);
+    }
+
+    body {
+      font-family: var(--font-sans);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 24px 16px 80px;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    /* Top Preview Control Header */
+    .preview-top-bar {
+      width: 100%;
+      max-width: 1120px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 14px 22px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 36px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    }
+
+    .brand-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(249, 115, 22, 0.15);
+      border: 1px solid rgba(249, 115, 22, 0.35);
+      color: #f97316;
+      font-family: var(--font-heading);
+      font-size: 0.92rem;
+      font-weight: 700;
+      padding: 6px 14px;
+      border-radius: 9999px;
+    }
+
+    .top-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .btn-toggle-theme {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      color: inherit;
+      padding: 8px 16px;
+      border-radius: 10px;
+      font-family: inherit;
+      font-size: 0.88rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s ease;
+    }
+
+    .btn-toggle-theme:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+
+    .btn-replay-anim {
+      background: var(--primary);
+      color: #ffffff;
+      border: none;
+      padding: 8px 18px;
+      border-radius: 10px;
+      font-family: inherit;
+      font-size: 0.88rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 4px 14px rgba(249, 115, 22, 0.35);
+      transition: all 0.2s ease;
+    }
+
+    .btn-replay-anim:hover {
+      background: var(--primary-hover);
+      transform: translateY(-2px);
+    }
+
+    .main-preview-wrap {
+      width: 100%;
+      max-width: 1120px;
+      display: flex;
+      flex-direction: column;
+      gap: 50px;
+    }
+
+    .section-title-tag {
+      text-align: center;
+      font-family: var(--font-heading);
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: var(--primary);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: -10px;
+    }
+
+    /* =========================================================================
+       STYLE VARIANT A: SLEEK FLOATING GLASSMORPHIC IMPACT ISLAND (RECOMMENDED)
+       ========================================================================= */
+    .metrics-island-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 24px;
+      padding: 32px 28px;
+      box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.25), 0 0 30px var(--stat-glow);
+      backdrop-filter: blur(16px);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .metrics-island-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, #f97316, #fbbf24, #0284c7, #8b5cf6, #10b981);
+    }
+
+    .metrics-grid-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      align-items: center;
+    }
+
+    .metric-col-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 10px 14px;
+      position: relative;
+      transition: transform 0.2s ease;
+    }
+
+    .metric-col-item:hover {
+      transform: translateY(-4px);
+    }
+
+    /* Dividers between columns */
+    .metric-col-item:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      right: -10px;
+      top: 15%;
+      height: 70%;
+      width: 1px;
+      background: var(--border-color);
+    }
+
+    .metric-icon-badge {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.25rem;
+      margin-bottom: 12px;
+      transition: transform 0.25s ease;
+    }
+
+    .metric-col-item:hover .metric-icon-badge {
+      transform: scale(1.12) rotate(5deg);
+    }
+
+    .badge-orange { background: rgba(249, 115, 22, 0.15); color: #f97316; }
+    .badge-gold   { background: rgba(245, 158, 11, 0.15); color: #f59e0b; }
+    .badge-blue   { background: rgba(2, 132, 199, 0.15);  color: #0284c7; }
+    .badge-purple { background: rgba(139, 92, 246, 0.15); color: #8b5cf6; }
+
+    .metric-number-display {
+      font-family: var(--font-heading);
+      font-size: 2.5rem;
+      font-weight: 900;
+      color: var(--stat-number);
+      line-height: 1;
+      margin-bottom: 6px;
+      letter-spacing: -0.02em;
+    }
+
+    .metric-number-display .accent-char {
+      color: var(--primary);
+    }
+
+    .metric-label-title {
+      font-family: var(--font-heading);
+      font-size: 1.02rem;
+      font-weight: 700;
+      color: var(--stat-number);
+      margin-bottom: 4px;
+    }
+
+    .metric-subtext-desc {
+      font-size: 0.84rem;
+      color: var(--text-subtle);
+      line-height: 1.35;
+    }
+
+    /* =========================================================================
+       STYLE VARIANT B: COMPACT PILL STRIP
+       ========================================================================= */
+    .metrics-pill-strip {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+    }
+
+    .metric-pill-box {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 18px 20px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+      transition: all 0.25s ease;
+    }
+
+    .metric-pill-box:hover {
+      transform: translateY(-3px);
+      border-color: var(--primary);
+      box-shadow: 0 8px 24px var(--stat-glow);
+    }
+
+    .pill-icon-circle {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+      flex-shrink: 0;
+    }
+
+    .pill-content-wrap {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .pill-big-number {
+      font-family: var(--font-heading);
+      font-size: 1.65rem;
+      font-weight: 800;
+      color: var(--stat-number);
+      line-height: 1.1;
+    }
+
+    .pill-small-label {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text-muted);
+    }
+
+    @media (max-width: 900px) {
+      .metrics-grid-row {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 30px;
+      }
+      .metric-col-item:not(:last-child)::after {
+        display: none;
+      }
+    }
+
+    @media (max-width: 540px) {
+      .metrics-grid-row {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body class="dark-theme">
+
+  <!-- Top Bar -->
+  <div class="preview-top-bar">
+    <span class="brand-tag">
+      <i class="fa-solid fa-chart-line"></i> Option 2: Engineering Impact Metrics Strip
+    </span>
+
+    <div class="top-actions">
+      <button type="button" class="btn-toggle-theme" id="btn-theme-toggle">
+        <i class="fa-solid fa-moon"></i> Toggle Dark/Light
+      </button>
+      <button type="button" class="btn-replay-anim" id="btn-replay">
+        <i class="fa-solid fa-rotate-right"></i> Replay Counting Animation
+      </button>
+      <a href="http://localhost:3000/" target="_blank" style="color: inherit; text-decoration: none; font-size: 0.85rem; font-weight: 600; margin-left: 8px;">
+        Main Portfolio &rarr;
+      </a>
+    </div>
+  </div>
+
+  <div class="main-preview-wrap">
+
+    <!-- =========================================================================
+         VARIANT 1: THE FLOATING IMPACT ISLAND (RECOMMENDED)
+         ========================================================================= -->
+    <div>
+      <div class="section-title-tag">✨ Variant 1: Floating Glassmorphic Impact Island (Recommended)</div>
+      <p style="text-align: center; font-size: 0.9rem; color: var(--text-muted); margin: 10px 0 20px;">
+        Placed directly between your Hero Intro and About Me sections to give recruiters high-impact proof of engineering excellence.
+      </p>
+
+      <div class="metrics-island-card">
+        <div class="metrics-grid-row">
+          
+          <!-- Metric 1: CGPA -->
+          <div class="metric-col-item">
+            <div class="metric-icon-badge badge-orange">
+              <i class="fa-solid fa-bolt"></i>
+            </div>
+            <div class="metric-number-display">
+              <span class="counter-num" data-target="8.9" data-decimals="1">0.0</span>
+            </div>
+            <div class="metric-label-title">B.E. VLSI CGPA</div>
+            <div class="metric-subtext-desc">Distinction Grade at GEC</div>
+          </div>
+
+          <!-- Metric 2: Hackathons Won -->
+          <div class="metric-col-item">
+            <div class="metric-icon-badge badge-gold">
+              <i class="fa-solid fa-trophy"></i>
+            </div>
+            <div class="metric-number-display">
+              <span class="counter-num" data-target="4" data-decimals="0">0</span><span class="accent-char">+</span>
+            </div>
+            <div class="metric-label-title">Hackathons &amp; Expos Won</div>
+            <div class="metric-subtext-desc">1st &amp; 2nd Place Awards</div>
+          </div>
+
+          <!-- Metric 3: IEEE Web Traffic -->
+          <div class="metric-col-item">
+            <div class="metric-icon-badge badge-blue">
+              <i class="fa-solid fa-users"></i>
+            </div>
+            <div class="metric-number-display">
+              <span class="counter-num" data-target="1000" data-decimals="0">0</span><span class="accent-char">+</span>
+            </div>
+            <div class="metric-label-title">Web Users Served</div>
+            <div class="metric-subtext-desc">Official IEEE GEC Portal</div>
+          </div>
+
+          <!-- Metric 4: Core Engineering Tools -->
+          <div class="metric-col-item">
+            <div class="metric-icon-badge badge-purple">
+              <i class="fa-solid fa-microchip"></i>
+            </div>
+            <div class="metric-number-display">
+              <span class="counter-num" data-target="9" data-decimals="0">0</span><span class="accent-char">+</span>
+            </div>
+            <div class="metric-label-title">Core Tools &amp; HDLs</div>
+            <div class="metric-subtext-desc">Cadence, Verilog, C++, AI</div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- =========================================================================
+         VARIANT 2: COMPACT 4-PILL CARDS
+         ========================================================================= -->
+    <div>
+      <div class="section-title-tag">✨ Variant 2: Multi-Card Grid Style</div>
+      <p style="text-align: center; font-size: 0.9rem; color: var(--text-muted); margin: 10px 0 20px;">
+        Modular cards with clean circular badge icons.
+      </p>
+
+      <div class="metrics-pill-strip">
+        
+        <div class="metric-pill-box">
+          <div class="pill-icon-circle badge-orange">
+            <i class="fa-solid fa-bolt"></i>
+          </div>
+          <div class="pill-content-wrap">
+            <div class="pill-big-number"><span class="counter-num" data-target="8.9" data-decimals="1">0.0</span> CGPA</div>
+            <div class="pill-small-label">VLSI Engineering (GEC)</div>
+          </div>
+        </div>
+
+        <div class="metric-pill-box">
+          <div class="pill-icon-circle badge-gold">
+            <i class="fa-solid fa-trophy"></i>
+          </div>
+          <div class="pill-content-wrap">
+            <div class="pill-big-number"><span class="counter-num" data-target="4" data-decimals="0">0</span>+ Won</div>
+            <div class="pill-small-label">Hackathons &amp; Expos</div>
+          </div>
+        </div>
+
+        <div class="metric-pill-box">
+          <div class="pill-icon-circle badge-blue">
+            <i class="fa-solid fa-globe"></i>
+          </div>
+          <div class="pill-content-wrap">
+            <div class="pill-big-number"><span class="counter-num" data-target="1000" data-decimals="0">0</span>+ Users</div>
+            <div class="pill-small-label">IEEE GEC Portal Traffic</div>
+          </div>
+        </div>
+
+        <div class="metric-pill-box">
+          <div class="pill-icon-circle badge-purple">
+            <i class="fa-solid fa-layer-group"></i>
+          </div>
+          <div class="pill-content-wrap">
+            <div class="pill-big-number"><span class="counter-num" data-target="9" data-decimals="0">0</span>+ Tools</div>
+            <div class="pill-small-label">EDA, HDLs, Embedded &amp; AI</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Animated Counter Script -->
+  <script>
+    function animateCounters() {
+      const counters = document.querySelectorAll('.counter-num');
+      counters.forEach(counter => {
+        const target = parseFloat(counter.getAttribute('data-target'));
+        const decimals = parseInt(counter.getAttribute('data-decimals'), 10) || 0;
+        const duration = 1600; // ms
+        const startTime = performance.now();
+
+        function updateCounter(currentTime) {
+          const elapsed = currentTime - startTime;
+          const progress = Math.min(elapsed / duration, 1);
+          
+          // Easing function (easeOutExpo)
+          const easeProgress = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
+          const currentVal = (target * easeProgress).toFixed(decimals);
+
+          counter.textContent = currentVal;
+
+          if (progress < 1) {
+            requestAnimationFrame(updateCounter);
+          } else {
+            counter.textContent = target.toFixed(decimals);
+          }
+        }
+
+        requestAnimationFrame(updateCounter);
+      });
+    }
+
+    // Trigger on load
+    window.addEventListener('DOMContentLoaded', animateCounters);
+
+    // Replay button
+    document.getElementById('btn-replay').addEventListener('click', animateCounters);
+
+    // Theme Switcher
+    const themeBtn = document.getElementById('btn-theme-toggle');
+    themeBtn.addEventListener('click', () => {
+      if (document.body.classList.contains('dark-theme')) {
+        document.body.classList.remove('dark-theme');
+        document.body.classList.add('light-theme');
+        themeBtn.innerHTML = '<i class="fa-solid fa-sun"></i> Toggle Dark/Light';
+      } else {
+        document.body.classList.remove('light-theme');
+        document.body.classList.add('dark-theme');
+        themeBtn.innerHTML = '<i class="fa-solid fa-moon"></i> Toggle Dark/Light';
+      }
+    });
+  </script>
+
+</body>
+</html>

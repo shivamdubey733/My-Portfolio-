@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Preview: IEEE GEC Style Intro Animation</title>
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+      background-color: #090d16;
+      color: #f8fafc;
+      overflow: hidden;
+      width: 100vw;
+      height: 100vh;
+    }
+
+    /* ==========================================================================
+       IEEE GEC Style Interactive Spotlight Gradient Background
+       ========================================================================== */
+    .ieee-intro-wrapper {
+      position: fixed;
+      inset: 0;
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 100;
+      /* Dynamic Mouse Spotlight Gradient */
+      background: radial-gradient(
+        circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+        rgba(249, 115, 22, 0.42) 0%,
+        rgba(249, 115, 22, 0.22) 18%,
+        rgba(30, 41, 59, 0.75) 45%,
+        #090d16 100%
+      );
+      backdrop-filter: blur(8px);
+      transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s ease;
+    }
+
+    /* Ambient Subtle Floating Dust */
+    .ambient-particles {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background-image: 
+        radial-gradient(rgba(249, 115, 22, 0.3) 1px, transparent 1px),
+        radial-gradient(rgba(255, 255, 255, 0.15) 1px, transparent 1px);
+      background-size: 40px 40px, 80px 80px;
+      background-position: 0 0, 20px 20px;
+      opacity: 0.6;
+    }
+
+    /* Content Stage */
+    .intro-center-box {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 20px;
+      max-width: 1000px;
+      width: 100%;
+    }
+
+    /* Top Subtitle Badge */
+    .intro-pill-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 16px;
+      background: rgba(15, 23, 42, 0.7);
+      border: 1px solid rgba(249, 115, 22, 0.4);
+      border-radius: 9999px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: #fdba74;
+      margin-bottom: 28px;
+      box-shadow: 0 0 20px rgba(249, 115, 22, 0.2);
+      animation: fadeInDown 0.8s ease;
+    }
+
+    .pulse-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #f97316;
+      box-shadow: 0 0 8px #f97316;
+      animation: pulse 1.5s infinite;
+    }
+
+    /* Typewriter Main Typography (Matching IEEE GEC Style) */
+    .typewriter-container {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 12px 18px;
+      font-family: 'Outfit', sans-serif;
+      font-size: clamp(2.2rem, 5.5vw, 4.8rem);
+      font-weight: 800;
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+      min-height: 130px;
+    }
+
+    .typewriter-word {
+      display: inline-flex;
+      align-items: center;
+    }
+
+    .typewriter-char {
+      display: inline-block;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity 0.15s ease, transform 0.15s ease;
+    }
+
+    .typewriter-char.revealed {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Specific Word Colors from IEEE GEC Theme */
+    .word-light {
+      color: #f1f5f9;
+      text-shadow: 0 4px 20px rgba(0,0,0,0.5);
+    }
+
+    .word-orange {
+      color: #f97316;
+      text-shadow: 0 0 25px rgba(249, 115, 22, 0.5);
+    }
+
+    .word-gradient {
+      background: linear-gradient(135deg, #ffffff 10%, #fdba74 50%, #f97316 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      filter: drop-shadow(0 4px 25px rgba(249, 115, 22, 0.4));
+    }
+
+    /* Blinking Vertical Cursor Bar (Exact Aceternity / IEEE GEC Style) */
+    .typewriter-cursor {
+      display: inline-block;
+      width: 4px;
+      height: 1.1em;
+      background-color: #f97316;
+      border-radius: 2px;
+      margin-left: 6px;
+      box-shadow: 0 0 12px #f97316;
+      animation: blink 0.75s infinite;
+      vertical-align: middle;
+    }
+
+    /* Bottom Action Controls */
+    .intro-bottom-bar {
+      position: absolute;
+      bottom: 40px;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      z-index: 3;
+    }
+
+    .btn-skip {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 22px;
+      border-radius: 9999px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #cbd5e1;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      backdrop-filter: blur(10px);
+      transition: all 0.2s ease;
+    }
+
+    .btn-skip:hover {
+      background: rgba(249, 115, 22, 0.2);
+      border-color: #f97316;
+      color: #ffffff;
+      transform: translateY(-2px);
+    }
+
+    .btn-replay {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 22px;
+      border-radius: 9999px;
+      background: #f97316;
+      border: 1px solid #ea580c;
+      color: #ffffff;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: 0 0 20px rgba(249, 115, 22, 0.4);
+      transition: all 0.2s ease;
+    }
+
+    .btn-replay:hover {
+      background: #ea580c;
+      transform: translateY(-2px);
+      box-shadow: 0 0 30px rgba(249, 115, 22, 0.6);
+    }
+
+    /* Sample Hero Preview Background Behind the Intro */
+    .hero-demo-stage {
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      background: #ffffff;
+      color: #0f172a;
+      padding: 20px;
+    }
+
+    .hero-demo-card {
+      background: #f8fafc;
+      border: 1.5px solid #e2e8f0;
+      border-radius: 20px;
+      padding: 40px;
+      max-width: 650px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.06);
+    }
+
+    .hero-demo-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 2.4rem;
+      font-weight: 800;
+      color: #0f172a;
+    }
+
+    .hero-demo-role {
+      font-family: 'Outfit', sans-serif;
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: #f97316;
+      margin-bottom: 12px;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(0.8); opacity: 0.5; }
+    }
+
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-15px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ==========================================================================
+       INTRO ANIMATION LAYER (IEEE GEC STYLE)
+       ========================================================================== -->
+  <div class="ieee-intro-wrapper" id="intro-wrapper">
+    <div class="ambient-particles"></div>
+
+    <div class="intro-center-box">
+      <!-- Status Badge -->
+      <div class="intro-pill-tag">
+        <span class="pulse-dot"></span>
+        <span>SHIVAM DUBEY // PORTFOLIO INTRO</span>
+      </div>
+
+      <!-- Typewriter Words Container -->
+      <div class="typewriter-container" id="typewriter-container">
+        <!-- Generated dynamically via JS -->
+      </div>
+    </div>
+
+    <!-- Bottom Controls -->
+    <div class="intro-bottom-bar">
+      <button class="btn-skip" id="btn-skip">
+        <span>Enter Portfolio</span>
+        <i class="fa-solid fa-arrow-right"></i>
+      </button>
+      <button class="btn-replay" id="btn-replay">
+        <i class="fa-solid fa-rotate-right"></i>
+        <span>Replay Intro</span>
+      </button>
+    </div>
+  </div>
+
+
+  <!-- ==========================================================================
+       DEMO HERO PREVIEW (Revealed after Intro)
+       ========================================================================== -->
+  <div class="hero-demo-stage">
+    <div class="hero-demo-card">
+      <div style="font-size: 1.1rem; color: #475569; font-weight: 600; margin-bottom: 6px;">Hi there! 👋, I'm</div>
+      <h1 class="hero-demo-title">Shivam Dubey</h1>
+      <h2 class="hero-demo-role">Electronics &amp; VLSI Engineer</h2>
+      <p style="color: #475569; font-size: 1.05rem; line-height: 1.6; margin-top: 14px;">
+        Electronics engineering student dedicated to building smart embedded devices, exploring semiconductor &amp; VLSI technology, and leveraging Artificial Intelligence for real-world innovation.
+      </p>
+      <button onclick="location.reload()" style="margin-top: 24px; padding: 12px 28px; background: #f97316; color: white; border: none; border-radius: 9999px; font-weight: 600; cursor: pointer; box-shadow: 0 10px 20px rgba(249,115,22,0.35);">
+        <i class="fa-solid fa-rotate-right"></i> Re-test Intro Animation
+      </button>
+    </div>
+  </div>
+
+
+  <!-- ==========================================================================
+       INTERACTIVE SPOTLIGHT & TYPEWRITER ENGINE SCRIPT
+       ========================================================================== -->
+  <script>
+    (function () {
+      'use strict';
+
+      const wrapper = document.getElementById('intro-wrapper');
+      const container = document.getElementById('typewriter-container');
+      const skipBtn = document.getElementById('btn-skip');
+      const replayBtn = document.getElementById('btn-replay');
+
+      // 1. Mouse Spotlight Tracker (Matches IEEE GEC Website)
+      function onMouseMove(e) {
+        if (!wrapper) return;
+        const rect = wrapper.getBoundingClientRect();
+        const x = ((e.clientX - rect.left) / rect.width) * 100;
+        const y = ((e.clientY - rect.top) / rect.height) * 100;
+        wrapper.style.setProperty('--mouse-x', x + '%');
+        wrapper.style.setProperty('--mouse-y', y + '%');
+      }
+
+      window.addEventListener('mousemove', onMouseMove, { passive: true });
+
+      // 2. Typewriter Word Sequence
+      const wordsConfig = [
+        { text: "Welcome", class: "word-light" },
+        { text: "To", class: "word-light" },
+        { text: "The", class: "word-light" },
+        { text: "Portfolio", class: "word-orange" },
+        { text: "Of", class: "word-light" },
+        { text: "Shivam Dubey.", class: "word-gradient" }
+      ];
+
+      let typeTimeout;
+      let exitTimeout;
+
+      function renderTypewriter() {
+        if (!container) return;
+        container.innerHTML = '';
+
+        // Create character elements
+        const allChars = [];
+        wordsConfig.forEach((wordObj, wIdx) => {
+          const wordSpan = document.createElement('span');
+          wordSpan.className = 'typewriter-word ' + wordObj.class;
+
+          for (let i = 0; i < wordObj.text.length; i++) {
+            const charSpan = document.createElement('span');
+            charSpan.className = 'typewriter-char';
+            charSpan.textContent = wordObj.text[i];
+            wordSpan.appendChild(charSpan);
+            allChars.push(charSpan);
+          }
+
+          container.appendChild(wordSpan);
+
+          // Add space between words if not last
+          if (wIdx < wordsConfig.length - 1) {
+            const space = document.createElement('span');
+            space.innerHTML = '&nbsp;';
+            container.appendChild(space);
+          }
+        });
+
+        // Add blinking cursor
+        const cursor = document.createElement('span');
+        cursor.className = 'typewriter-cursor';
+        container.appendChild(cursor);
+
+        // Animate typing character by character
+        let currentIdx = 0;
+        const charDelay = 70; // ms per character
+
+        function typeNext() {
+          if (currentIdx < allChars.length) {
+            allChars[currentIdx].classList.add('revealed');
+            currentIdx++;
+            typeTimeout = setTimeout(typeNext, charDelay);
+          } else {
+            // Typing complete: Wait 1.4s then smoothly reveal hero page
+            exitTimeout = setTimeout(revealHero, 1400);
+          }
+        }
+
+        // Start typing after initial 300ms pause
+        clearTimeout(typeTimeout);
+        clearTimeout(exitTimeout);
+        typeTimeout = setTimeout(typeNext, 300);
+      }
+
+      function revealHero() {
+        if (!wrapper) return;
+        wrapper.style.opacity = '0';
+        wrapper.style.transform = 'scale(1.04)';
+        setTimeout(() => {
+          wrapper.style.display = 'none';
+        }, 800);
+      }
+
+      function replayIntro() {
+        if (!wrapper) return;
+        clearTimeout(typeTimeout);
+        clearTimeout(exitTimeout);
+        wrapper.style.display = 'flex';
+        wrapper.style.opacity = '1';
+        wrapper.style.transform = 'scale(1)';
+        renderTypewriter();
+      }
+
+      if (skipBtn) skipBtn.addEventListener('click', revealHero);
+      if (replayBtn) replayBtn.addEventListener('click', replayIntro);
+
+      // Start initial run
+      renderTypewriter();
+    })();
+  </script>
+</body>
+</html>

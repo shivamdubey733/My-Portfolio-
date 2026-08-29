@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Preview: Interactive Hardware & Sonar Radar Widget — Shivam Dubey</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --primary: #f97316;
+      --primary-hover: #ea580c;
+      --bg-dark: #090d16;
+      --bg-card: #0f172a;
+      --bg-surface: #1e293b;
+      --border-color: rgba(255, 255, 255, 0.12);
+      --text-primary: #ffffff;
+      --text-muted: #cbd5e1;
+      --font-sans: 'Plus Jakarta Sans', sans-serif;
+      --font-heading: 'Outfit', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      background: radial-gradient(circle at 50% 0%, #1e1b4b 0%, #090d16 60%, #030712 100%);
+      color: var(--text-primary);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 30px 16px 60px;
+    }
+
+    /* Top Preview Notice */
+    .preview-header-bar {
+      width: 100%;
+      max-width: 1000px;
+      background: rgba(15, 23, 42, 0.85);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 16px 24px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 32px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    }
+
+    .preview-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(249, 115, 22, 0.15);
+      border: 1px solid rgba(249, 115, 22, 0.4);
+      color: #fdba74;
+      font-family: var(--font-heading);
+      font-size: 0.9rem;
+      font-weight: 700;
+      padding: 6px 14px;
+      border-radius: 9999px;
+    }
+
+    .btn-view-main {
+      background: #1e293b;
+      border: 1px solid var(--border-color);
+      color: #ffffff;
+      font-size: 0.88rem;
+      font-weight: 600;
+      padding: 8px 18px;
+      border-radius: 10px;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s ease;
+    }
+
+    .btn-view-main:hover {
+      background: var(--primary);
+      border-color: var(--primary);
+    }
+
+    /* Main Showcase Container */
+    .showcase-container {
+      width: 100%;
+      max-width: 1000px;
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+
+    /* Tab Controller */
+    .widget-tabs-nav {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+    }
+
+    .widget-tab-btn {
+      background: #0f172a;
+      border: 1px solid var(--border-color);
+      color: #94a3b8;
+      font-family: var(--font-heading);
+      font-size: 1rem;
+      font-weight: 700;
+      padding: 12px 24px;
+      border-radius: 12px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transition: all 0.2s ease;
+    }
+
+    .widget-tab-btn:hover,
+    .widget-tab-btn.active {
+      background: var(--primary);
+      color: #ffffff;
+      border-color: var(--primary);
+      box-shadow: 0 8px 24px rgba(249, 115, 22, 0.35);
+    }
+
+    /* Widget Panel Card */
+    .widget-panel {
+      display: none;
+      background: #0f172a;
+      border: 1px solid var(--border-color);
+      border-radius: 24px;
+      padding: 32px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+    }
+
+    .widget-panel.active {
+      display: block;
+      animation: fadeIn 0.3s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .widget-header-title {
+      font-family: var(--font-heading);
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: #ffffff;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .widget-header-desc {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin-bottom: 28px;
+    }
+
+    /* =========================================================================
+       WIDGET 1: SONAR RADAR & ULTRASONIC SENSOR SIMULATOR
+       ========================================================================= */
+    .sonar-simulator-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 28px;
+      align-items: center;
+    }
+
+    /* Radar Canvas Box */
+    .radar-display-box {
+      background: #040813;
+      border: 2px solid #0284c7;
+      border-radius: 20px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      box-shadow: inset 0 0 40px rgba(2, 132, 199, 0.2), 0 10px 30px rgba(0, 0, 0, 0.5);
+    }
+
+    #radarCanvas {
+      width: 100%;
+      max-width: 380px;
+      height: 280px;
+      display: block;
+    }
+
+    .radar-telemetry-strip {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      margin-top: 14px;
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      color: #38bdf8;
+      border-top: 1px solid rgba(56, 189, 248, 0.25);
+      padding-top: 10px;
+    }
+
+    /* Controls & Hardware State */
+    .sonar-controls-card {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      background: #1e293b;
+      border: 1px solid var(--border-color);
+      border-radius: 18px;
+      padding: 24px;
+    }
+
+    .control-label-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .control-title {
+      font-family: var(--font-mono);
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: #94a3b8;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .distance-readout-badge {
+      font-family: var(--font-mono);
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: #38bdf8;
+      background: #0f172a;
+      padding: 4px 14px;
+      border-radius: 8px;
+      border: 1px solid rgba(56, 189, 248, 0.3);
+    }
+
+    .slider-range-input {
+      width: 100%;
+      height: 8px;
+      border-radius: 6px;
+      background: #0f172a;
+      outline: none;
+      cursor: pointer;
+      accent-color: var(--primary);
+    }
+
+    /* Hardware Alert Status Display */
+    .hardware-alert-box {
+      border-radius: 12px;
+      padding: 16px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      transition: all 0.3s ease;
+    }
+
+    .alert-state-safe {
+      background: rgba(16, 185, 129, 0.15);
+      border: 1px solid #10b981;
+      color: #34d399;
+    }
+
+    .alert-state-warning {
+      background: rgba(245, 158, 11, 0.15);
+      border: 1px solid #f59e0b;
+      color: #fbbf24;
+    }
+
+    .alert-state-critical {
+      background: rgba(239, 68, 68, 0.2);
+      border: 1px solid #ef4444;
+      color: #f87171;
+      animation: alertPulse 0.6s infinite alternate;
+    }
+
+    @keyframes alertPulse {
+      from { box-shadow: 0 0 10px rgba(239, 68, 68, 0.2); }
+      to { box-shadow: 0 0 25px rgba(239, 68, 68, 0.6); }
+    }
+
+    .alert-icon-circle {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.25rem;
+      flex-shrink: 0;
+      background: rgba(0, 0, 0, 0.3);
+    }
+
+    .alert-text-title {
+      font-family: var(--font-heading);
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 2px;
+    }
+
+    .alert-text-sub {
+      font-size: 0.84rem;
+      opacity: 0.9;
+      line-height: 1.35;
+    }
+
+    /* Arduino Nano Circuit Pinout Indicators */
+    .pinout-live-strip {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+
+    .pin-status-pill {
+      background: #0f172a;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 10px;
+      text-align: center;
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+    }
+
+    .pin-name {
+      color: #94a3b8;
+      margin-bottom: 4px;
+    }
+
+    .pin-val {
+      font-weight: 700;
+      color: #38bdf8;
+    }
+
+    /* =========================================================================
+       WIDGET 2: 4-BIT VLSI DIGITAL LOGIC GATE SIMULATOR
+       ========================================================================= */
+    .logic-sim-container {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .logic-switches-bar {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 32px;
+      background: #1e293b;
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 20px;
+    }
+
+    .switch-group {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .switch-label {
+      font-family: var(--font-mono);
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #ffffff;
+    }
+
+    .toggle-logic-btn {
+      width: 64px;
+      height: 34px;
+      border-radius: 20px;
+      background: #334155;
+      border: 2px solid #475569;
+      position: relative;
+      cursor: pointer;
+      transition: all 0.25s ease;
+    }
+
+    .toggle-logic-btn::after {
+      content: '';
+      position: absolute;
+      top: 3px;
+      left: 3px;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: #ffffff;
+      transition: transform 0.25s ease, background 0.25s ease;
+    }
+
+    .toggle-logic-btn.on {
+      background: #10b981;
+      border-color: #10b981;
+      box-shadow: 0 0 15px rgba(16, 185, 129, 0.5);
+    }
+
+    .toggle-logic-btn.on::after {
+      transform: translateX(30px);
+    }
+
+    .switch-val-indicator {
+      font-family: var(--font-mono);
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: #64748b;
+      min-width: 24px;
+    }
+
+    .switch-val-indicator.active {
+      color: #34d399;
+    }
+
+    /* Gates Output Grid */
+    .gates-cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 16px;
+    }
+
+    .gate-output-card {
+      background: #1e293b;
+      border: 1px solid var(--border-color);
+      border-radius: 14px;
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      text-align: center;
+      transition: all 0.2s ease;
+    }
+
+    .gate-output-card.output-high {
+      border-color: var(--primary);
+      box-shadow: 0 0 20px rgba(249, 115, 22, 0.25);
+    }
+
+    .gate-name-badge {
+      font-family: var(--font-mono);
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: #fdba74;
+    }
+
+    .gate-bulb-icon {
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.35rem;
+      background: #0f172a;
+      color: #475569;
+      border: 1px solid var(--border-color);
+      transition: all 0.3s ease;
+    }
+
+    .gate-output-card.output-high .gate-bulb-icon {
+      background: rgba(249, 115, 22, 0.25);
+      color: #f97316;
+      border-color: #f97316;
+      box-shadow: 0 0 20px rgba(249, 115, 22, 0.6);
+      transform: scale(1.1);
+    }
+
+    .gate-expression {
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      color: #94a3b8;
+    }
+
+    .gate-result-pill {
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      font-weight: 700;
+      padding: 3px 12px;
+      border-radius: 6px;
+      background: #0f172a;
+      color: #64748b;
+    }
+
+    .gate-output-card.output-high .gate-result-pill {
+      background: rgba(16, 185, 129, 0.2);
+      color: #34d399;
+      border: 1px solid rgba(16, 185, 129, 0.4);
+    }
+
+    @media (max-width: 768px) {
+      .sonar-simulator-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Bar -->
+  <div class="preview-header-bar">
+    <span class="preview-tag">
+      <i class="fa-solid fa-microchip"></i> Interactive Hardware Playground
+    </span>
+    <span style="font-weight: 700; font-size: 0.95rem;">Stand-alone Preview (Main portfolio untouched)</span>
+    <a href="http://localhost:3000/" target="_blank" class="btn-view-main">
+      <i class="fa-solid fa-arrow-left"></i> Back to Full Portfolio
+    </a>
+  </div>
+
+  <div class="showcase-container">
+    
+    <!-- Tab Selector -->
+    <div class="widget-tabs-nav">
+      <button class="widget-tab-btn active" data-tab="tab-sonar">
+        <i class="fa-solid fa-satellite-dish"></i> Ultrasonic Sonar Distance Radar
+      </button>
+      <button class="widget-tab-btn" data-tab="tab-logic">
+        <i class="fa-solid fa-microchip"></i> VLSI Logic Gate Truth Simulator
+      </button>
+    </div>
+
+    <!-- =========================================================================
+         TAB 1: SONAR RADAR SIMULATOR
+         ========================================================================= -->
+    <div class="widget-panel active" id="tab-sonar">
+      <h3 class="widget-header-title">
+        <i class="fa-solid fa-eye" style="color: #38bdf8;"></i> "Third Eye for the Blind" — Sonar Radar Simulator
+      </h3>
+      <p class="widget-header-desc">
+        Interact with the live ultrasonic sonar sweep below. Drag the distance slider to simulate obstacles at varying proximity and watch the Arduino Nano compute echo pulse latency, distance thresholds, and trigger haptic/audio alarms in real time.
+      </p>
+
+      <div class="sonar-simulator-grid">
+        
+        <!-- Radar Screen -->
+        <div class="radar-display-box">
+          <canvas id="radarCanvas" width="380" height="280"></canvas>
+          <div class="radar-telemetry-strip">
+            <span>TX FREQ: 40 kHz</span>
+            <span>SONIC SPEED: 343 m/s</span>
+            <span id="telemetryLatency">ECHO: 291 µs</span>
+          </div>
+        </div>
+
+        <!-- Controls -->
+        <div class="sonar-controls-card">
+          
+          <div>
+            <div class="control-label-row">
+              <span class="control-title">Obstacle Distance</span>
+              <span class="distance-readout-badge" id="distReadout">50 cm</span>
+            </div>
+            <input type="range" min="5" max="200" value="50" class="slider-range-input" id="distanceSlider" style="margin-top: 12px;">
+          </div>
+
+          <!-- Dynamic Alert Box -->
+          <div class="hardware-alert-box alert-state-warning" id="alertBox">
+            <div class="alert-icon-circle" id="alertIcon">
+              <i class="fa-solid fa-triangle-exclamation"></i>
+            </div>
+            <div>
+              <div class="alert-text-title" id="alertTitle">CAUTION: Proximity Alert</div>
+              <div class="alert-text-sub" id="alertDesc">Obstacle within 50 cm. Medium-frequency haptic pulse active.</div>
+            </div>
+          </div>
+
+          <!-- MCU Pinout Readout -->
+          <div class="pinout-live-strip">
+            <div class="pin-status-pill">
+              <div class="pin-name">PIN D9 (TRIG)</div>
+              <div class="pin-val">HIGH (10µs)</div>
+            </div>
+            <div class="pin-status-pill">
+              <div class="pin-name">PIN D10 (ECHO)</div>
+              <div class="pin-val" id="echoPinVal">2915 µs</div>
+            </div>
+            <div class="pin-status-pill">
+              <div class="pin-name">PIN D3 (HAPTIC)</div>
+              <div class="pin-val" id="hapticPinVal">PWM 65%</div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+
+    <!-- =========================================================================
+         TAB 2: VLSI LOGIC GATE SIMULATOR
+         ========================================================================= -->
+    <div class="widget-panel" id="tab-logic">
+      <h3 class="widget-header-title">
+        <i class="fa-solid fa-bolt" style="color: #f97316;"></i> VLSI Digital Logic Simulator
+      </h3>
+      <p class="widget-header-desc">
+        Toggle Input Switch A and Input Switch B to simulate fundamental CMOS digital logic gates. Watch the live high/low voltage transitions and truth table states compute instantaneously.
+      </p>
+
+      <div class="logic-sim-container">
+        
+        <!-- Input Switches -->
+        <div class="logic-switches-bar">
+          
+          <div class="switch-group">
+            <span class="switch-label">INPUT A</span>
+            <button type="button" class="toggle-logic-btn" id="switchA"></button>
+            <span class="switch-val-indicator" id="valA">0</span>
+          </div>
+
+          <div style="font-size: 1.5rem; color: #475569;">|</div>
+
+          <div class="switch-group">
+            <span class="switch-label">INPUT B</span>
+            <button type="button" class="toggle-logic-btn" id="switchB"></button>
+            <span class="switch-val-indicator" id="valB">0</span>
+          </div>
+
+        </div>
+
+        <!-- Logic Gates Grid -->
+        <div class="gates-cards-grid">
+          
+          <!-- AND Gate -->
+          <div class="gate-output-card" id="gate-and">
+            <span class="gate-name-badge">AND GATE</span>
+            <div class="gate-bulb-icon"><i class="fa-regular fa-lightbulb"></i></div>
+            <div class="gate-expression">Y = A • B</div>
+            <div class="gate-result-pill" id="out-and">OUT: 0 (LOW)</div>
+          </div>
+
+          <!-- OR Gate -->
+          <div class="gate-output-card" id="gate-or">
+            <span class="gate-name-badge">OR GATE</span>
+            <div class="gate-bulb-icon"><i class="fa-regular fa-lightbulb"></i></div>
+            <div class="gate-expression">Y = A + B</div>
+            <div class="gate-result-pill" id="out-or">OUT: 0 (LOW)</div>
+          </div>
+
+          <!-- NAND Gate -->
+          <div class="gate-output-card output-high" id="gate-nand">
+            <span class="gate-name-badge">NAND GATE</span>
+            <div class="gate-bulb-icon"><i class="fa-solid fa-lightbulb"></i></div>
+            <div class="gate-expression">Y = (A • B)'</div>
+            <div class="gate-result-pill" id="out-nand">OUT: 1 (HIGH)</div>
+          </div>
+
+          <!-- XOR Gate -->
+          <div class="gate-output-card" id="gate-xor">
+            <span class="gate-name-badge">XOR GATE</span>
+            <div class="gate-bulb-icon"><i class="fa-regular fa-lightbulb"></i></div>
+            <div class="gate-expression">Y = A ⊕ B</div>
+            <div class="gate-result-pill" id="out-xor">OUT: 0 (LOW)</div>
+          </div>
+
+          <!-- NOR Gate -->
+          <div class="gate-output-card output-high" id="gate-nor">
+            <span class="gate-name-badge">NOR GATE</span>
+            <div class="gate-bulb-icon"><i class="fa-solid fa-lightbulb"></i></div>
+            <div class="gate-expression">Y = (A + B)'</div>
+            <div class="gate-result-pill" id="out-nor">OUT: 1 (HIGH)</div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Interactive JavaScript -->
+  <script>
+    // Tab Switching
+    const tabBtns = document.querySelectorAll('.widget-tab-btn');
+    const panels = document.querySelectorAll('.widget-panel');
+
+    tabBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        tabBtns.forEach(b => b.classList.remove('active'));
+        panels.forEach(p => p.classList.remove('active'));
+
+        btn.classList.add('active');
+        const tabId = btn.getAttribute('data-tab');
+        const targetPanel = document.getElementById(tabId);
+        if (targetPanel) targetPanel.classList.add('active');
+      });
+    });
+
+    // =========================================================================
+    // 1. SONAR RADAR CANVAS ANIMATION & SLIDER LOGIC
+    // =========================================================================
+    const canvas = document.getElementById('radarCanvas');
+    const ctx = canvas.getContext('2d');
+    const slider = document.getElementById('distanceSlider');
+    const distReadout = document.getElementById('distReadout');
+    const telemetryLatency = document.getElementById('telemetryLatency');
+    const echoPinVal = document.getElementById('echoPinVal');
+    const hapticPinVal = document.getElementById('hapticPinVal');
+    const alertBox = document.getElementById('alertBox');
+    const alertIcon = document.getElementById('alertIcon');
+    const alertTitle = document.getElementById('alertTitle');
+    const alertDesc = document.getElementById('alertDesc');
+
+    let sweepAngle = 0;
+    let targetDist = 50;
+
+    function updateHardwareState(dist) {
+      targetDist = dist;
+      distReadout.textContent = dist + ' cm';
+      
+      const latencyMicroSec = Math.round((dist * 2 / 0.0343));
+      telemetryLatency.textContent = 'ECHO: ' + latencyMicroSec + ' µs';
+      echoPinVal.textContent = latencyMicroSec + ' µs';
+
+      alertBox.className = 'hardware-alert-box';
+
+      if (dist < 25) {
+        // Critical Alert
+        alertBox.classList.add('alert-state-critical');
+        alertIcon.innerHTML = '<i class="fa-solid fa-triangle-exclamation"></i>';
+        alertTitle.textContent = 'CRITICAL: Obstacle Very Close!';
+        alertDesc.textContent = 'Proximity < 25 cm. Maximum haptic vibration + continuous buzzer alarm!';
+        hapticPinVal.textContent = 'PWM 100%';
+      } else if (dist <= 75) {
+        // Warning
+        alertBox.classList.add('alert-state-warning');
+        alertIcon.innerHTML = '<i class="fa-solid fa-triangle-exclamation"></i>';
+        alertTitle.textContent = 'CAUTION: Obstacle Detected';
+        alertDesc.textContent = 'Proximity at ' + dist + ' cm. Pulsed haptic feedback active.';
+        hapticPinVal.textContent = 'PWM 60%';
+      } else {
+        // Safe
+        alertBox.classList.add('alert-state-safe');
+        alertIcon.innerHTML = '<i class="fa-solid fa-circle-check"></i>';
+        alertTitle.textContent = 'SAFE: Clear Path Ahead';
+        alertDesc.textContent = 'Proximity > 75 cm. Haptic & buzzer idle (power-saving mode).';
+        hapticPinVal.textContent = 'OFF (0%)';
+      }
+    }
+
+    slider.addEventListener('input', (e) => {
+      updateHardwareState(parseInt(e.target.value, 10));
+    });
+
+    // Radar Canvas Animation Loop
+    function drawRadar() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      const cx = canvas.width / 2;
+      const cy = canvas.height - 20;
+      const maxR = canvas.height - 40;
+
+      // Draw Grid Arcs
+      ctx.lineWidth = 1;
+      for (let r = 1; r <= 4; r++) {
+        const radius = (maxR / 4) * r;
+        ctx.beginPath();
+        ctx.arc(cx, cy, radius, Math.PI, 2 * Math.PI);
+        ctx.strokeStyle = 'rgba(56, 189, 248, 0.2)';
+        ctx.stroke();
+      }
+
+      // Angle lines
+      for (let a = Math.PI; a <= 2 * Math.PI; a += Math.PI / 4) {
+        ctx.beginPath();
+        ctx.moveTo(cx, cy);
+        ctx.lineTo(cx + Math.cos(a) * maxR, cy + Math.sin(a) * maxR);
+        ctx.strokeStyle = 'rgba(56, 189, 248, 0.15)';
+        ctx.stroke();
+      }
+
+      // Draw Sweeping Beam
+      sweepAngle += 0.035;
+      const sweepRad = Math.PI + (Math.sin(sweepAngle) * 0.5 + 0.5) * Math.PI;
+
+      const beamX = cx + Math.cos(sweepRad) * maxR;
+      const beamY = cy + Math.sin(sweepRad) * maxR;
+
+      const grad = ctx.createRadialGradient(cx, cy, 10, cx, cy, maxR);
+      grad.addColorStop(0, 'rgba(56, 189, 248, 0.8)');
+      grad.addColorStop(1, 'rgba(14, 165, 233, 0)');
+
+      ctx.beginPath();
+      ctx.moveTo(cx, cy);
+      ctx.lineTo(beamX, beamY);
+      ctx.strokeStyle = '#38bdf8';
+      ctx.lineWidth = 2;
+      ctx.stroke();
+
+      // Draw Detected Obstacle Blip
+      const normalizedDist = targetDist / 200; // 0 to 1
+      const blipR = maxR * normalizedDist;
+      const blipX = cx + Math.cos(Math.PI * 1.5) * blipR;
+      const blipY = cy + Math.sin(Math.PI * 1.5) * blipR;
+
+      ctx.beginPath();
+      ctx.arc(blipX, blipY, 7, 0, 2 * Math.PI);
+      ctx.fillStyle = targetDist < 30 ? '#ef4444' : targetDist < 80 ? '#f59e0b' : '#10b981';
+      ctx.shadowColor = ctx.fillStyle;
+      ctx.shadowBlur = 15;
+      ctx.fill();
+      ctx.shadowBlur = 0;
+
+      // Sonar wave ring
+      ctx.beginPath();
+      ctx.arc(blipX, blipY, 14 + (Math.sin(sweepAngle * 3) * 4), 0, 2 * Math.PI);
+      ctx.strokeStyle = ctx.fillStyle;
+      ctx.lineWidth = 1.5;
+      ctx.stroke();
+
+      requestAnimationFrame(drawRadar);
+    }
+
+    drawRadar();
+    updateHardwareState(50);
+
+    // =========================================================================
+    // 2. VLSI DIGITAL LOGIC SIMULATOR
+    // =========================================================================
+    const btnA = document.getElementById('switchA');
+    const btnB = document.getElementById('switchB');
+    const valA = document.getElementById('valA');
+    const valB = document.getElementById('valB');
+
+    let stateA = 0;
+    let stateB = 0;
+
+    function updateLogicOutputs() {
+      valA.textContent = stateA;
+      valB.textContent = stateB;
+      valA.classList.toggle('active', stateA === 1);
+      valB.classList.toggle('active', stateB === 1);
+
+      const outAnd = stateA & stateB;
+      const outOr = stateA | stateB;
+      const outNand = !(stateA & stateB) ? 1 : 0;
+      const outXor = stateA ^ stateB;
+      const outNor = !(stateA | stateB) ? 1 : 0;
+
+      function renderGate(id, outVal) {
+        const card = document.getElementById('gate-' + id);
+        const readout = document.getElementById('out-' + id);
+        const icon = card.querySelector('.gate-bulb-icon i');
+
+        card.classList.toggle('output-high', outVal === 1);
+        readout.textContent = `OUT: ${outVal} (${outVal === 1 ? 'HIGH' : 'LOW'})`;
+        icon.className = outVal === 1 ? 'fa-solid fa-lightbulb' : 'fa-regular fa-lightbulb';
+      }
+
+      renderGate('and', outAnd);
+      renderGate('or', outOr);
+      renderGate('nand', outNand);
+      renderGate('xor', outXor);
+      renderGate('nor', outNor);
+    }
+
+    btnA.addEventListener('click', () => {
+      stateA = stateA === 0 ? 1 : 0;
+      btnA.classList.toggle('on', stateA === 1);
+      updateLogicOutputs();
+    });
+
+    btnB.addEventListener('click', () => {
+      stateB = stateB === 0 ? 1 : 0;
+      btnB.classList.toggle('on', stateB === 1);
+      updateLogicOutputs();
+    });
+
+    updateLogicOutputs();
+  </script>
+
+</body>
+</html>

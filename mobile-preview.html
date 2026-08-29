@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mobile View Preview — Shivam Dubey Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: #0b0f19;
+      color: #f8fafc;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px 16px 40px;
+      overflow-x: hidden;
+    }
+
+    /* Top Control Bar */
+    .top-toolbar {
+      width: 100%;
+      max-width: 1100px;
+      background: rgba(17, 24, 39, 0.85);
+      backdrop-filter: blur(14px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 16px;
+      padding: 14px 22px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 28px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    }
+
+    .toolbar-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand-pill {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(249, 115, 22, 0.15);
+      border: 1px solid rgba(249, 115, 22, 0.35);
+      color: #fdba74;
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 700;
+      padding: 6px 14px;
+      border-radius: 9999px;
+    }
+
+    .toolbar-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .toolbar-center {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .btn-device {
+      background: #1e293b;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: #cbd5e1;
+      font-family: inherit;
+      font-size: 0.86rem;
+      font-weight: 600;
+      padding: 8px 16px;
+      border-radius: 10px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s ease;
+    }
+
+    .btn-device:hover,
+    .btn-device.active {
+      background: #f97316;
+      border-color: #f97316;
+      color: #ffffff;
+      box-shadow: 0 4px 14px rgba(249, 115, 22, 0.4);
+    }
+
+    .btn-orientation {
+      background: #1e293b;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: #cbd5e1;
+      font-size: 0.86rem;
+      font-weight: 600;
+      padding: 8px 14px;
+      border-radius: 10px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+    }
+
+    .btn-orientation:hover {
+      background: #334155;
+      color: #fff;
+    }
+
+    .toolbar-right {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .btn-open-real {
+      background: #10b981;
+      color: #ffffff;
+      font-size: 0.85rem;
+      font-weight: 700;
+      padding: 8px 16px;
+      border-radius: 10px;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+      transition: all 0.2s ease;
+    }
+
+    .btn-open-real:hover {
+      background: #059669;
+      transform: translateY(-2px);
+    }
+
+    /* Phone Mockup Frame Container */
+    .simulator-stage {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      min-height: 860px;
+      position: relative;
+    }
+
+    /* Sleek iPhone / Modern Smartphone Hardware Shell */
+    .phone-mockup-frame {
+      position: relative;
+      background: #18181b;
+      border-radius: 54px;
+      padding: 13px;
+      box-shadow: 0 0 0 3px #3f3f46,
+                  0 0 0 6px #18181b,
+                  0 30px 80px -10px rgba(0, 0, 0, 0.8),
+                  0 0 40px rgba(249, 115, 22, 0.15);
+      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* Dynamic Island / Camera Notch */
+    .phone-island {
+      position: absolute;
+      top: 22px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 110px;
+      height: 28px;
+      background: #000000;
+      border-radius: 20px;
+      z-index: 50;
+      pointer-events: none;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 10px;
+    }
+
+    .island-lens {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #111827;
+      box-shadow: inset 0 0 2px rgba(255, 255, 255, 0.2);
+    }
+
+    .island-sensor {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #030712;
+    }
+
+    /* Screen Glass & Iframe */
+    .phone-screen-container {
+      width: 393px;
+      height: 852px;
+      background: #ffffff;
+      border-radius: 44px;
+      overflow: hidden;
+      position: relative;
+      transition: width 0.3s ease, height 0.3s ease;
+    }
+
+    .phone-iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      display: block;
+      background: #ffffff;
+    }
+
+    /* Real Phone LAN IP Guide */
+    .lan-info-card {
+      margin-top: 36px;
+      width: 100%;
+      max-width: 680px;
+      background: rgba(30, 41, 59, 0.7);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 16px;
+      padding: 20px 24px;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+    }
+
+    .lan-icon-box {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      background: rgba(16, 185, 129, 0.15);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      color: #34d399;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      flex-shrink: 0;
+    }
+
+    .lan-text-title {
+      font-size: 0.96rem;
+      font-weight: 700;
+      color: #f8fafc;
+      margin-bottom: 4px;
+    }
+
+    .lan-text-desc {
+      font-size: 0.85rem;
+      color: #94a3b8;
+      line-height: 1.5;
+    }
+
+    .lan-code-url {
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 700;
+      color: #fdba74;
+      background: rgba(0, 0, 0, 0.4);
+      padding: 2px 8px;
+      border-radius: 6px;
+      display: inline-block;
+      margin-top: 4px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- =========================================================================
+       TOP CONTROL BAR
+       ========================================================================= -->
+  <div class="top-toolbar">
+    
+    <div class="toolbar-left">
+      <span class="brand-pill"><i class="fa-solid fa-mobile-screen-button"></i> Mobile Preview</span>
+      <span class="toolbar-title">Shivam Dubey's Portfolio</span>
+    </div>
+
+    <!-- Device Presets -->
+    <div class="toolbar-center">
+      <button class="btn-device active" data-w="393" data-h="852" data-name="iPhone 15 Pro">
+        <i class="fa-brands fa-apple"></i> iPhone 15 Pro (393px)
+      </button>
+
+      <button class="btn-device" data-w="412" data-h="915" data-name="Samsung S24">
+        <i class="fa-brands fa-android"></i> Galaxy S24 (412px)
+      </button>
+
+      <button class="btn-device" data-w="375" data-h="667" data-name="iPhone SE">
+        <i class="fa-solid fa-mobile"></i> Compact SE (375px)
+      </button>
+
+      <button class="btn-orientation" id="btn-toggle-rotate" title="Rotate Orientation">
+        <i class="fa-solid fa-rotate"></i> <span>Rotate</span>
+      </button>
+    </div>
+
+    <div class="toolbar-right">
+      <a href="http://localhost:3000/" target="_blank" class="btn-open-real" title="Open Full Desktop Page">
+        <i class="fa-solid fa-arrow-up-right-from-square"></i> Full Website
+      </a>
+    </div>
+
+  </div>
+
+  <!-- =========================================================================
+       PHONE SIMULATOR STAGE
+       ========================================================================= -->
+  <div class="simulator-stage">
+    
+    <div class="phone-mockup-frame" id="phone-frame">
+      
+      <!-- Dynamic Island / Top Speaker Bar -->
+      <div class="phone-island">
+        <div class="island-lens"></div>
+        <div class="island-sensor"></div>
+      </div>
+
+      <!-- Phone Screen with Live Iframe -->
+      <div class="phone-screen-container" id="phone-screen">
+        <iframe src="http://localhost:3000/" class="phone-iframe" id="mobile-iframe" title="Shivam Dubey Portfolio Mobile View"></iframe>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- =========================================================================
+       HOW TO TEST ON YOUR PHYSICAL SMARTPHONE (Wi-Fi LAN)
+       ========================================================================= -->
+  <div class="lan-info-card">
+    <div class="lan-icon-box">
+      <i class="fa-solid fa-wifi"></i>
+    </div>
+    <div>
+      <div class="lan-text-title">📱 Test on Your Real Physical Smartphone:</div>
+      <div class="lan-text-desc">
+        Connect your phone to the same Wi-Fi network and open this URL in your mobile browser (Safari / Chrome):<br>
+        <span class="lan-code-url">http://192.168.31.172:3000</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       SIMULATOR INTERACTIVITY SCRIPT
+       ========================================================================= -->
+  <script>
+    (function () {
+      const screen = document.getElementById('phone-screen');
+      const deviceBtns = document.querySelectorAll('.btn-device');
+      const rotateBtn = document.getElementById('btn-toggle-rotate');
+
+      let currentW = 393;
+      let currentH = 852;
+      let isRotated = false;
+
+      function updateDimensions() {
+        const w = isRotated ? currentH : currentW;
+        const h = isRotated ? currentW : currentH;
+        screen.style.width = w + 'px';
+        screen.style.height = h + 'px';
+      }
+
+      deviceBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          deviceBtns.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+
+          currentW = parseInt(btn.getAttribute('data-w'), 10);
+          currentH = parseInt(btn.getAttribute('data-h'), 10);
+          updateDimensions();
+        });
+      });
+
+      if (rotateBtn) {
+        rotateBtn.addEventListener('click', () => {
+          isRotated = !isRotated;
+          updateDimensions();
+          rotateBtn.classList.toggle('active', isRotated);
+        });
+      }
+    })();
+  </script>
+
+</body>
+</html>

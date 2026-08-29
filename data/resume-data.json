@@ -1,0 +1,150 @@
+{
+  "personal": {
+    "name": "Shivam Dubey",
+    "headline": "Electronics & VLSI Engineer",
+    "email": "shivamkumardubey71@gmail.com",
+    "phone": "+91 9175704438",
+    "location": "Goa, India",
+    "linkedin": "https://www.linkedin.com/in/shivam-dubey-949a353a9",
+    "github": "https://github.com/shivamdubey733",
+    "resumePdf": "assets/resume/Shivam_Dubey_Resume.pdf",
+    "summary": "Detail-oriented Electronics Engineering student specializing in VLSI Design & Technology with a strong academic foundation (8.9 CGPA). Hands-on experience in IC design methodologies using Cadence Virtuoso, digital logic design, and hardware description languages (Verilog, SystemVerilog). Proven technical adaptability through an AI/ML internship at Lenovo, web development roles for IEEE, and embedded systems project prototyping."
+  },
+  "education": [
+    {
+      "period": "2024 — 2028 (Current)",
+      "institution": "Goa College of Engineering, Goa University",
+      "degree": "B.E. in Electronics Engineering — VLSI Design & Technology",
+      "score": "CGPA: 8.9"
+    },
+    {
+      "period": "2023 — 2024",
+      "institution": "Fr. Agnel Multipurpose Higher Secondary School",
+      "degree": "Higher Secondary School Certificate (Class XII)",
+      "score": "Score: 74%"
+    },
+    {
+      "period": "2021 — 2022",
+      "institution": "Fr. Agnel Multipurpose High School",
+      "degree": "Secondary School Certificate (Class X)",
+      "score": "Score: 94%"
+    }
+  ],
+  "skills": {
+    "softwareTiles": [
+      { "id": "cadence", "code": "Cd", "name": "Cadence Virtuoso", "class": "tile-cadence" },
+      { "id": "verilog", "code": "Vl", "name": "Verilog / HDL", "class": "tile-verilog" },
+      { "id": "python", "code": "Py", "name": "Python", "class": "tile-python" },
+      { "id": "cpp", "code": "C++", "name": "C / C++", "class": "tile-cpp" },
+      { "id": "arduino", "icon": "fa-solid fa-infinity", "name": "Arduino", "class": "tile-arduino" },
+      { "id": "mcu", "code": "8051", "name": "8051 MCU", "class": "tile-mcu" },
+      { "id": "kicad", "code": "Ki", "name": "KiCad EDA", "class": "tile-kicad" },
+      { "id": "vscode", "icon": "fa-solid fa-code", "name": "VS Code", "class": "tile-vscode" },
+      { "id": "git", "icon": "fa-brands fa-git-alt", "name": "Git & GitHub", "class": "tile-git" }
+    ],
+    "categories": [
+      {
+        "icon": "fa-solid fa-microchip",
+        "iconColor": "#f97316",
+        "title": "VLSI & IC Design",
+        "tags": ["Verilog", "SystemVerilog", "Cadence Virtuoso", "CMOS Fundamentals", "Digital Logic Design", "Circuit Analysis"]
+      },
+      {
+        "icon": "fa-solid fa-bolt",
+        "iconColor": "#0284c7",
+        "title": "Electronics & Embedded",
+        "tags": ["Digital & Analog Electronics", "Semiconductor Devices", "8051 Microcontroller", "Arduino", "Assembly Language", "KiCad"]
+      },
+      {
+        "icon": "fa-solid fa-code",
+        "iconColor": "#8b5cf6",
+        "title": "Languages & Core Tools",
+        "tags": ["C", "C++", "Python", "Git", "GitHub", "VS Code"]
+      }
+    ]
+  },
+  "projects": [
+    {
+      "id": "piezo-energy",
+      "title": "Footstep Energy Generation Using Piezoelectric Sensors",
+      "tags": "Piezoelectric Sensors • Embedded Systems • Renewable Energy",
+      "bullets": [
+        "Designed and built an end-to-end prototype that harvests kinetic mechanical energy from footsteps and converts it to regulated electrical energy using piezoelectric sensors.",
+        "Configured energy storage circuits and analyzed low-power applications to establish efficient power management for sustainable IoT devices."
+      ],
+      "flowchart": {
+        "label": "SYSTEM ARCHITECTURE FLOW",
+        "nodes": ["👣 Footstep Pressure", "⚡ Piezo Sensor Array", "🔄 Bridge Rectifier", "🔋 Capacitor Storage", "💡 Low-Power Output"]
+      }
+    },
+    {
+      "id": "third-eye",
+      "title": "Third Eye Smart Navigation System",
+      "tags": "Arduino Nano • Ultrasonic Sonar • Assistive Hardware",
+      "hasSonarSimulator": true,
+      "bullets": [
+        "Engineered an assistive navigation system utilizing Arduino microcontrollers and ultrasonic sensors to detect obstacles in real-time.",
+        "Integrated synchronous buzzer and haptic vibration alert mechanisms to provide intuitive, low-latency feedback for visually impaired users."
+      ],
+      "flowchart": {
+        "label": "SMART DETECTION FLOW",
+        "nodes": ["📡 Sonar Echo Pulse", "🧠 Arduino Nano MCU", "🚨 Distance Threshold Logic", "📳 Haptic Vibration Alert"]
+      }
+    }
+  ],
+  "experience": [
+    {
+      "period": "2025 (2 Months)",
+      "company": "Lenovo",
+      "role": "Artificial Intelligence Intern",
+      "type": "Hybrid Internship",
+      "icon": "fa-solid fa-code",
+      "badgeClass": "exp-badge-navy",
+      "bullets": [
+        "Acquired practical experience in Artificial Intelligence and Machine Learning fundamentals, exploring core concepts including supervised learning, regression, and clustering algorithms.",
+        "Implemented data preprocessing and exploratory data analysis (EDA) techniques to handle datasets, improving analytical and troubleshooting methodologies.",
+        "Completed AI/ML-based assignments and practical projects, demonstrating strong engineering problem-solving and algorithmic implementation skills."
+      ]
+    }
+  ],
+  "responsibility": [
+    {
+      "period": "2026 — Present",
+      "organization": "IEEE Student Branch — Goa College of Engineering",
+      "role": "Executive Webmaster & Event Coordinator",
+      "icon": "fa-solid fa-network-wired",
+      "badgeClass": "exp-badge-gold",
+      "bullets": [
+        "Manage, maintain, and deploy the official IEEE GEC website (ieee.gec.ac.in).",
+        "Coordinate the planning, communication, and technical infrastructure for college-wide IEEE events, workshops, and hackathons.",
+        "Collaborate with student council members and academic advisors to promote IEEE initiatives, boosting student registration and active event participation.",
+        "Leverage leadership, public communication, and project management skills to lead volunteer groups and organize technical training programs."
+      ]
+    }
+  ],
+  "achievements": {
+    "certificatesDriveLink": "https://drive.google.com/drive/folders/13V29WFrXVyDhEkM5mGv4QQSvWwNZBXxj?usp=sharing",
+    "items": [
+      {
+        "rank": "1st Place",
+        "event": "Shark Tank, RIT TechTwister",
+        "description": "Awarded 1st Place for startup idea presentation, market viability, and pitching."
+      },
+      {
+        "rank": "1st Place",
+        "event": "Innovibe Project Expo, AITD",
+        "description": "1st Place for presenting an innovative engineering and hardware prototyping solution."
+      },
+      {
+        "rank": "2nd Place",
+        "event": "Inceptions Ideathon, NIT Goa",
+        "description": "Awarded 2nd Place for innovative problem-solving and technical idea presentation."
+      },
+      {
+        "rank": "Winner",
+        "event": "Lenovo Leap Hackathon",
+        "description": "Winner for technical innovation and algorithmic problem-solving."
+      }
+    ]
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "name": "shivam-portfolio",
+  "version": "1.0.0",
+  "description": "Portfolio of Shivam Dubey - Electronics & VLSI Engineer and Web Developer",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js",
+    "sync-resume": "node sync-resume.js"
+  },
+  "keywords": [
+    "portfolio",
+    "web-developer",
+    "electronics",
+    "vlsi",
+    "threejs",
+    "javascript"
+  ],
+  "author": "Shivam Dubey",
+  "license": "MIT"
+}

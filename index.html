@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shivam Dubey — Electronics &amp; VLSI Engineer | Portfolio</title>
+  <meta name="description" content="Portfolio of Shivam Dubey - Electronics Engineering Student specializing in VLSI Design &amp; Technology (8.9 CGPA), Cadence Virtuoso, Embedded Systems, and AI Innovation at Goa College of Engineering.">
+  
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚡</text></svg>">
+
+  <!-- Google Fonts: Plus Jakarta Sans & Outfit -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+
+  <!-- FontAwesome 6 Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="css/style.css?v=3.8">
+
+  <!-- Three.js & GSAP for 3D Intro Animation -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+</head>
+<body class="light-theme">
+
+  <!-- =========================================================================
+       1. TYPEWRITER INTRO ANIMATION (IEEE GEC STYLE)
+       ========================================================================= -->
+  <div class="ieee-intro-wrapper" id="intro-wrapper">
+    <div class="ambient-particles"></div>
+    <div class="intro-center-box">
+      <div class="typewriter-container" id="typewriter-container"></div>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       CONTINUOUS AMBIENT GLOW & FLOATING TECH ELEMENTS BACKGROUND LAYER
+       ========================================================================= -->
+  <div class="ambient-glow-backdrop"></div>
+  <div class="ieee-floating-bg-layer" id="floating-bg-layer"></div>
+
+  <!-- =========================================================================
+       2. TOP NAVIGATION BAR (Exact Replica of Reference Design)
+       ========================================================================= -->
+  <header class="site-header" id="navbar">
+    <div class="header-container">
+      
+      <!-- Brand Logo: </> DevPortfolio -->
+      <a href="#hero" class="brand-logo" aria-label="DevPortfolio Logo">
+        <span class="logo-brackets">&lt;/&gt;</span>
+        <span class="logo-text">DevPortfolio</span>
+      </a>
+
+      <!-- Navigation Menu Center -->
+      <nav class="nav-links" id="nav-links">
+        <a href="#hero" class="nav-item active">Home</a>
+        <a href="#about" class="nav-item">About</a>
+        <a href="#education" class="nav-item">Education</a>
+        <a href="#skills" class="nav-item">Skills</a>
+        <a href="#projects" class="nav-item">Projects</a>
+        <a href="#experience" class="nav-item">Experience</a>
+        <a href="#achievements" class="nav-item">Achievements</a>
+        <a href="#contact" class="nav-item">Contact</a>
+      </nav>
+
+      <!-- Right Header Actions: Theme Toggle & Download Resume -->
+      <div class="header-actions">
+        <!-- Dark/Light Mode Switcher -->
+        <button class="btn-theme-toggle" id="btn-theme-toggle" aria-label="Toggle Dark/Light Mode" title="Toggle Theme">
+          <i class="fa-regular fa-moon icon-moon"></i>
+          <i class="fa-regular fa-sun icon-sun"></i>
+        </button>
+
+        <!-- View Resume Button (Orange Pill with PDF Icon) -->
+        <button type="button" class="btn-download-resume" id="btn-view-resume" aria-label="View Resume" title="View Resume">
+          <i class="fa-regular fa-file-pdf"></i>
+          <span>View Resume</span>
+        </button>
+
+        <!-- Mobile Menu Toggle -->
+        <button class="btn-mobile-menu" id="btn-mobile-menu" aria-label="Toggle Mobile Menu">
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+
+  <!-- =========================================================================
+       3. HERO SECTION (Exact Replica of Reference Design)
+       ========================================================================= -->
+  <main>
+    <section class="hero-section" id="hero">
+      <div class="hero-container">
+        
+        <!-- ================= LEFT COLUMN: HERO CONTENT ================= -->
+        <div class="hero-left-column">
+          
+          <!-- Friendly Greeting -->
+          <div class="hero-greeting">
+            <span>Hi there! 👋, I'm</span>
+          </div>
+
+          <!-- Main Name & Role Title (Exact Qualification from Resume) -->
+          <div class="hero-title-group">
+            <h1 class="hero-name">Shivam Dubey</h1>
+            <h2 class="hero-role">Electronics &amp; VLSI Engineer</h2>
+          </div>
+
+          <!-- Bio Description (Electronics + VLSI + AI Integration) -->
+          <p class="hero-description">
+            Electronics engineering student dedicated to building smart embedded devices, exploring semiconductor &amp; VLSI technology, and leveraging Artificial Intelligence for real-world innovation.
+          </p>
+
+          <!-- Call To Action Buttons -->
+          <div class="hero-cta-group">
+            <a href="#projects" class="btn-cta-primary">
+              <span>View My Projects</span>
+              <i class="fa-solid fa-arrow-right"></i>
+            </a>
+
+            <a href="mailto:shivamkumardubey71@gmail.com" class="btn-cta-secondary">
+              <span>Contact Me</span>
+              <i class="fa-regular fa-envelope"></i>
+            </a>
+          </div>
+
+          <!-- Social Links Row with Exact Brand Colors from Reference -->
+          <div class="hero-social-row">
+            <span class="social-label">Find me on</span>
+            <div class="social-icons">
+              
+              <!-- GitHub (Black) -->
+              <a href="https://github.com/shivamdubey733" target="_blank" rel="noopener noreferrer" class="social-icon-btn social-btn-github" aria-label="GitHub Profile" title="GitHub">
+                <i class="fa-brands fa-github"></i>
+              </a>
+
+              <!-- LinkedIn (Blue) -->
+              <a href="https://www.linkedin.com/in/shivam-dubey-693245239" target="_blank" rel="noopener noreferrer" class="social-icon-btn social-btn-linkedin" aria-label="LinkedIn Profile" title="LinkedIn">
+                <i class="fa-brands fa-linkedin-in"></i>
+              </a>
+
+              <!-- Facebook (Brand Blue) -->
+              <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" class="social-icon-btn social-btn-facebook" aria-label="Facebook Profile" title="Facebook">
+                <i class="fa-brands fa-facebook-f"></i>
+              </a>
+
+              <!-- Instagram (Gradient) -->
+              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="social-icon-btn social-btn-instagram" aria-label="Instagram Profile" title="Instagram">
+                <i class="fa-brands fa-instagram"></i>
+              </a>
+
+            </div>
+          </div>
+
+          <!-- Bottom Left Decorative Orange Loop Capsule -->
+          <div class="hero-bottom-loop-decor"></div>
+        </div>
+
+        <!-- ================= RIGHT COLUMN: STYLIZED PORTRAIT & BLOB ================= -->
+        <div class="hero-right-column">
+          <div class="portrait-stage-wrapper" id="portrait-stage">
+            
+            <!-- Top-Left Diagonal Circuit Lines & Nodes (Exact Replica) -->
+            <div class="tech-decor-wrapper">
+              <svg class="decor-diag-lines" viewBox="0 0 170 170" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <line x1="20" y1="120" x2="135" y2="25" stroke="#f97316" stroke-width="1.8" stroke-opacity="0.5" />
+                <circle cx="20" cy="120" r="3.5" fill="#f97316" />
+                <circle cx="135" cy="25" r="3" fill="#f97316" />
+                
+                <line x1="45" y1="140" x2="155" y2="48" stroke="#f97316" stroke-width="1.4" stroke-opacity="0.4" />
+                <circle cx="45" cy="140" r="3" fill="#fb923c" />
+                <circle cx="155" cy="48" r="2.5" fill="#fb923c" />
+
+                <line x1="70" y1="155" x2="148" y2="88" stroke="#f97316" stroke-width="1.2" stroke-opacity="0.3" />
+                <circle cx="70" cy="155" r="2.5" fill="#fdba74" />
+              </svg>
+
+              <!-- Subtle Geometric Grid Lines -->
+              <div class="decor-grid-accent"></div>
+            </div>
+
+            <!-- Warm Peach/Orange Organic Gradient Blob Card (Clips Portrait Seamlessly) -->
+            <div class="portrait-blob-card">
+              <img src="assets/images/shivam_enhanced.jpg" alt="Shivam Dubey - Web Developer" class="portrait-image" id="portrait-img">
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         4. SECTION 1: ABOUT ME & QUICK CONTACT
+         ========================================================================= -->
+    <section class="resume-section-container" id="about">
+      <div class="resume-content-wrap">
+        
+        <div class="resume-row-split">
+          <!-- Left: About Content -->
+          <div class="resume-left-col">
+            <span class="highlighter-badge">About Me</span>
+            <p class="resume-narrative-text">
+              I am an <strong>Electronics Engineering student</strong> at Goa College of Engineering specializing in <strong>VLSI Design &amp; Technology</strong> (8.9 CGPA). With a deep interest in silicon architecture, embedded systems, and intelligent machines, I bridge the gap between digital IC fundamentals and real-world AI applications.
+            </p>
+            <p class="resume-narrative-text">
+              Beyond circuit design, I serve as the <strong>Executive Webmaster</strong> for the IEEE GEC Student Branch, leading digital deployments and organizing premier engineering events.
+            </p>
+          </div>
+
+          <!-- Right: Contact & Quick Info (Matching Reference Image Layout) -->
+          <div class="resume-right-contact-col">
+            <div class="contact-info-list">
+              <div class="contact-info-item">
+                <i class="fa-solid fa-location-dot contact-icon-red"></i>
+                <span class="contact-info-val">Goa, India</span>
+              </div>
+              <div class="contact-info-item">
+                <i class="fa-brands fa-linkedin contact-icon-blue"></i>
+                <a href="https://www.linkedin.com/in/shivam-dubey-693245239" target="_blank" rel="noopener noreferrer" class="contact-info-val">SHIVAM DUBEY</a>
+              </div>
+              <div class="contact-info-item">
+                <i class="fa-brands fa-github contact-icon-black"></i>
+                <a href="https://github.com/shivamdubey733" target="_blank" rel="noopener noreferrer" class="contact-info-val">github.com/shivamdubey733</a>
+              </div>
+              <div class="contact-info-item">
+                <i class="fa-solid fa-envelope contact-icon-mail"></i>
+                <a href="mailto:shivamkumardubey71@gmail.com" class="contact-info-val">shivamkumardubey71@gmail.com</a>
+              </div>
+              <div class="contact-info-item">
+                <i class="fa-solid fa-phone contact-icon-green"></i>
+                <span class="contact-info-val">+91 9175704438</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="resume-section-divider"></div>
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         5. SECTION 2: EDUCATION (ALL 3 MILESTONES)
+         ========================================================================= -->
+    <section class="resume-section-container" id="education">
+      <div class="resume-content-wrap">
+        
+        <span class="highlighter-badge">Education</span>
+
+        <div class="education-timeline-grid" id="education-grid">
+          
+          <!-- Education Item 1: B.E. VLSI -->
+          <div class="education-entry-card">
+            <div class="edu-date-stamp">2024 — 2028 (Current)</div>
+            <h3 class="edu-institution-title">Goa College of Engineering, Goa University</h3>
+            <div class="edu-degree-subtitle">B.E. in Electronics Engineering — VLSI Design &amp; Technology</div>
+            <div class="edu-score-pill">CGPA: 8.9</div>
+          </div>
+
+          <!-- Education Item 2: Class XII -->
+          <div class="education-entry-card">
+            <div class="edu-date-stamp">2023 — 2024</div>
+            <h3 class="edu-institution-title">Fr. Agnel Multipurpose Higher Secondary School</h3>
+            <div class="edu-degree-subtitle">Higher Secondary School Certificate (Class XII)</div>
+            <div class="edu-score-pill">Score: 74%</div>
+          </div>
+
+          <!-- Education Item 3: Class X -->
+          <div class="education-entry-card">
+            <div class="edu-date-stamp">2021 — 2022</div>
+            <h3 class="edu-institution-title">Fr. Agnel Multipurpose High School</h3>
+            <div class="edu-degree-subtitle">Secondary School Certificate (Class X)</div>
+            <div class="edu-score-pill">Score: 94%</div>
+          </div>
+
+        </div>
+
+        <div class="resume-section-divider"></div>
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         6. SECTION 3: SOFTWARE & SKILLS (EXACT APP TILES FROM REFERENCE)
+         ========================================================================= -->
+    <section class="resume-section-container" id="skills">
+      <div class="resume-content-wrap">
+        
+        <span class="highlighter-badge">Software &amp; Skills</span>
+
+        <!-- App Icons Row (Matching Reference Image Style: Ps, Lr, Ai, etc.) -->
+        <div class="software-tiles-row" id="software-tiles-container">
+          
+          <div class="software-tile-item">
+            <div class="app-tile-box tile-cadence">Cd</div>
+            <span class="app-tile-name">Cadence<br>Virtuoso</span>
+          </div>
+
+          <div class="software-tile-item">
+            <div class="app-tile-box tile-verilog">Vl</div>
+            <span class="app-tile-name">Verilog /<br>HDL</span>
+          </div>
+
+          <div class="software-tile-item">
+            <div class="app-tile-box tile-python">Py</div>
+            <span class="app-tile-name">Python</span>
+          </div>
+
+          <div class="software-tile-item">
+            <div class="app-tile-box tile-cpp">C++</div>
+            <span class="app-tile-name">C / C++</span>
+          </div>
+
+          <div class="software-tile-item">
+            <div class="app-tile-box tile-arduino">
+              <i class="fa-solid fa-infinity"></i>
+            </div>
+            <span class="app-tile-name">Arduino</span>
+          </div>
+
+          <div class="software-tile-item">
+            <div class="app-tile-box tile-mcu">8051</div>
+            <span class="app-tile-name">8051<br>MCU</span>
+          </div>
+
+          <div class="software-tile-item">
+            <div class="app-tile-box tile-kicad">Ki</div>
+            <span class="app-tile-name">KiCad EDA</span>
+          </div>
+
+          <div class="software-tile-item">
+            <div class="app-tile-box tile-vscode">
+              <i class="fa-solid fa-code"></i>
+            </div>
+            <span class="app-tile-name">VS Code</span>
+          </div>
+
+          <div class="software-tile-item">
+            <div class="app-tile-box tile-git">
+              <i class="fa-brands fa-github"></i>
+            </div>
+            <span class="app-tile-name">Git &amp;<br>GitHub</span>
+          </div>
+
+        </div>
+
+        <!-- Categorized Core Competencies Cards Grid -->
+        <div class="skills-categories-grid" id="skills-categories-container">
+          <div class="skill-category-card">
+            <div class="skill-cat-header">
+              <span class="skill-cat-icon" style="color: #f97316;"><i class="fa-solid fa-microchip"></i></span>
+              <h4 class="skill-cat-title">VLSI &amp; IC Design</h4>
+            </div>
+            <div class="skill-tags-wrap">
+              <span class="inline-skill-tag">Verilog</span>
+              <span class="inline-skill-tag">SystemVerilog</span>
+              <span class="inline-skill-tag">Cadence Virtuoso</span>
+              <span class="inline-skill-tag">CMOS Fundamentals</span>
+              <span class="inline-skill-tag">Digital Logic Design</span>
+              <span class="inline-skill-tag">Circuit Analysis</span>
+            </div>
+          </div>
+
+          <div class="skill-category-card">
+            <div class="skill-cat-header">
+              <span class="skill-cat-icon" style="color: #0284c7;"><i class="fa-solid fa-bolt"></i></span>
+              <h4 class="skill-cat-title">Electronics &amp; Embedded</h4>
+            </div>
+            <div class="skill-tags-wrap">
+              <span class="inline-skill-tag">Digital &amp; Analog Electronics</span>
+              <span class="inline-skill-tag">Semiconductor Devices</span>
+              <span class="inline-skill-tag">8051 Microcontroller</span>
+              <span class="inline-skill-tag">Arduino</span>
+              <span class="inline-skill-tag">Assembly Language</span>
+              <span class="inline-skill-tag">KiCad</span>
+            </div>
+          </div>
+
+          <div class="skill-category-card">
+            <div class="skill-cat-header">
+              <span class="skill-cat-icon" style="color: #8b5cf6;"><i class="fa-solid fa-code"></i></span>
+              <h4 class="skill-cat-title">Languages &amp; Core Tools</h4>
+            </div>
+            <div class="skill-tags-wrap">
+              <span class="inline-skill-tag">C</span>
+              <span class="inline-skill-tag">C++</span>
+              <span class="inline-skill-tag">Python</span>
+              <span class="inline-skill-tag">Git</span>
+              <span class="inline-skill-tag">GitHub</span>
+              <span class="inline-skill-tag">VS Code</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="resume-section-divider"></div>
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         7. SECTION 4: PROJECTS (WITH FLOWCHART DIAGRAMS)
+         ========================================================================= -->
+    <section class="resume-section-container" id="projects">
+      <div class="resume-content-wrap">
+        
+        <span class="highlighter-badge">Projects</span>
+
+        <div class="projects-showcase-list" id="projects-list">
+          
+          <!-- Project 1: Footstep Energy Generation -->
+          <div class="project-entry-card">
+            <div class="project-header-row">
+              <div class="project-badge-circle badge-circle-blue">
+                <i class="fa-solid fa-bolt"></i>
+              </div>
+              <div class="project-meta-wrap">
+                <span class="project-tech-tags">Piezoelectric Sensors • Embedded Systems</span>
+                <h3 class="project-name-title">Footstep Energy Generation Using Piezoelectric Sensors</h3>
+              </div>
+            </div>
+
+            <p class="project-desc-body">
+              Developed an engineering prototype to convert mechanical footstep energy into electrical energy using an array of piezoelectric ceramic sensors. Explored energy storage banks and power management for sustainable, low-power applications.
+            </p>
+
+            <!-- Short Flowchart Diagram -->
+            <div class="flowchart-box-card">
+              <div class="flowchart-label">
+                <i class="fa-solid fa-diagram-project"></i>
+                <span>Hardware System Flow:</span>
+              </div>
+              <div class="flowchart-nodes-row">
+                <div class="flow-pill">👣 Footstep Pressure</div>
+                <div class="flow-arrow">➔</div>
+                <div class="flow-pill">⚡ Piezo Array</div>
+                <div class="flow-arrow">➔</div>
+                <div class="flow-pill">🔄 Bridge Rectifier</div>
+                <div class="flow-arrow">➔</div>
+                <div class="flow-pill">🔋 Capacitor Bank</div>
+                <div class="flow-arrow">➔</div>
+                <div class="flow-pill">💡 Low-Power Output</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Project 2: Third Eye Smart Navigation System -->
+          <div class="project-entry-card">
+            <div class="project-header-row">
+              <div class="project-badge-circle badge-circle-orange">
+                <i class="fa-solid fa-eye"></i>
+              </div>
+              <div class="project-meta-wrap">
+                <span class="project-tech-tags">Arduino • Ultrasonic Sensors • Assistive Tech</span>
+                <h3 class="project-name-title">Third Eye Smart Navigation System</h3>
+              </div>
+            </div>
+
+            <p class="project-desc-body">
+              Developed an obstacle-detection navigation assistive unit for visually impaired individuals using ultrasonic transceivers. Integrated real-time proximity threshold computation with dual audio buzzer and haptic vibration feedback.
+            </p>
+
+            <!-- Short Flowchart Diagram -->
+            <div class="flowchart-box-card">
+              <div class="flowchart-label">
+                <i class="fa-solid fa-diagram-project"></i>
+                <span>Assistive Sensing Flow:</span>
+              </div>
+              <div class="flowchart-nodes-row">
+                <div class="flow-pill">📡 Sonar Pulse</div>
+                <div class="flow-arrow">➔</div>
+                <div class="flow-pill">🧠 Arduino Nano</div>
+                <div class="flow-arrow">➔</div>
+                <div class="flow-pill">🚨 Threshold Logic</div>
+                <div class="flow-arrow">➔</div>
+                <div class="flow-pill">📳 Buzzer &amp; Haptic Alert</div>
+              </div>
+            </div>
+
+            <!-- Embedded Sonar Mini-Widget Simulator -->
+            <div class="sonar-mini-widget-box">
+              <div class="sonar-widget-header">
+                <span class="sonar-live-pill"><i class="fa-solid fa-satellite-dish"></i> LIVE HARDWARE SIMULATOR</span>
+                <span class="sonar-widget-subtitle">Interactive Ultrasonic Proximity &amp; PWM Haptic Feedback Sweep</span>
+              </div>
+
+              <div class="sonar-widget-inner-grid">
+                <!-- Radar Display Screen -->
+                <div class="sonar-radar-screen-wrap">
+                  <canvas id="sonarRadarCanvas" width="340" height="210"></canvas>
+                  <div class="radar-telemetry-strip">
+                    <span>TX: 40 kHz</span>
+                    <span>SPEED: 343 m/s</span>
+                    <span id="sonarTelemetryLatency">ECHO: 2915 µs</span>
+                  </div>
+                </div>
+
+                <!-- Controls & Dynamic Alert -->
+                <div class="sonar-widget-controls">
+                  <div>
+                    <div class="control-label-row">
+                      <span class="control-title">Obstacle Distance</span>
+                      <span class="distance-readout-badge" id="sonarDistReadout">50 cm</span>
+                    </div>
+                    <input type="range" min="5" max="200" value="50" class="slider-range-input" id="sonarDistanceSlider" style="margin-top: 10px;">
+                  </div>
+
+                  <!-- Dynamic Proximity Alert -->
+                  <div class="hardware-alert-box alert-state-warning" id="sonarAlertBox">
+                    <div class="alert-icon-circle" id="sonarAlertIcon">
+                      <i class="fa-solid fa-triangle-exclamation"></i>
+                    </div>
+                    <div>
+                      <div class="alert-text-title" id="sonarAlertTitle">CAUTION: Proximity Alert</div>
+                      <div class="alert-text-sub" id="sonarAlertDesc">Obstacle within 50 cm. Medium-frequency haptic pulse active.</div>
+                    </div>
+                  </div>
+
+                  <!-- Pinout Status -->
+                  <div class="pinout-live-strip">
+                    <div class="pin-status-pill">
+                      <div class="pin-name">PIN D9 (TRIG)</div>
+                      <div class="pin-val">HIGH (10µs)</div>
+                    </div>
+                    <div class="pin-status-pill">
+                      <div class="pin-name">PIN D10 (ECHO)</div>
+                      <div class="pin-val" id="sonarEchoPinVal">2915 µs</div>
+                    </div>
+                    <div class="pin-status-pill">
+                      <div class="pin-name">PIN D3 (HAPTIC)</div>
+                      <div class="pin-val" id="sonarHapticPinVal">PWM 60%</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="resume-section-divider"></div>
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         8. SECTION 5: EXPERIENCE & 9. SECTION 6: POSITIONS OF RESPONSIBILITY
+         ========================================================================= -->
+    <section class="resume-section-container" id="experience">
+      <div class="resume-content-wrap">
+        
+        <span class="highlighter-badge">Experience</span>
+
+        <!-- Two-Column Split (Matching Reference Image Layout) -->
+        <div class="experience-two-col-grid" id="experience-split-grid">
+          
+          <!-- Experience Column: Lenovo AI Intern -->
+          <div class="exp-col-item">
+            <div class="exp-header-row">
+              <div class="exp-circle-badge exp-badge-navy">
+                <i class="fa-solid fa-code"></i>
+              </div>
+              <div class="exp-header-text">
+                <div class="exp-date-label">2025 (2 Months) • Hybrid Internship</div>
+                <h3 class="exp-company-name">Lenovo</h3>
+                <div class="exp-role-title">Artificial Intelligence Intern</div>
+              </div>
+            </div>
+            <div class="exp-body-content">
+              <ul class="exp-bullets-list">
+                <li>Acquired practical experience in Artificial Intelligence and Machine Learning fundamentals, exploring core concepts including supervised learning, regression, and clustering algorithms.</li>
+                <li>Implemented data preprocessing and exploratory data analysis (EDA) techniques to handle datasets, improving analytical and troubleshooting methodologies.</li>
+                <li>Completed AI/ML-based assignments and practical projects, demonstrating strong engineering problem-solving and algorithmic implementation skills.</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Position of Responsibility Column: IEEE Webmaster -->
+          <div class="exp-col-item">
+            <div class="exp-header-row">
+              <div class="exp-circle-badge exp-badge-gold">
+                <i class="fa-solid fa-network-wired"></i>
+              </div>
+              <div class="exp-header-text">
+                <div class="exp-date-label">2026 — Present</div>
+                <h3 class="exp-company-name">IEEE Student Branch — Goa College of Engineering</h3>
+                <div class="exp-role-title">Executive Webmaster &amp; Event Coordinator</div>
+              </div>
+            </div>
+            <div class="exp-body-content">
+              <ul class="exp-bullets-list">
+                <li>Manage, maintain, and deploy the official IEEE GEC website (<code>ieee.gec.ac.in</code>).</li>
+                <li>Coordinate the planning, communication, and technical infrastructure for college-wide IEEE events, workshops, and hackathons.</li>
+                <li>Collaborate with student council members and academic advisors to promote IEEE initiatives, boosting student registration and active event participation.</li>
+                <li>Leverage leadership, public communication, and project management skills to lead volunteer groups and organize technical training programs.</li>
+              </ul>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="resume-section-divider"></div>
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         10. SECTION 7: ACHIEVEMENTS
+         ========================================================================= -->
+    <section class="resume-section-container" id="achievements">
+      <div class="resume-content-wrap">
+        
+        <span class="highlighter-badge">Achievements</span>
+
+        <div class="achievements-showcase-grid" id="achievements-grid">
+          
+          <!-- Achievement 1 -->
+          <div class="achievement-card-box">
+            <div class="trophy-badge-icon">🥇</div>
+            <div class="achievement-text-content">
+              <div class="achievement-rank-pill">1st Place</div>
+              <h4 class="achievement-title">Shark Tank — RIT TechTwister</h4>
+              <p class="achievement-desc">Awarded 1st Place for startup idea presentation and technical pitching.</p>
+            </div>
+          </div>
+
+          <!-- Achievement 2 -->
+          <div class="achievement-card-box">
+            <div class="trophy-badge-icon">🥇</div>
+            <div class="achievement-text-content">
+              <div class="achievement-rank-pill">1st Place</div>
+              <h4 class="achievement-title">Innovibe Project Expo — AITD</h4>
+              <p class="achievement-desc">Awarded 1st Place for presenting an innovative engineering solution.</p>
+            </div>
+          </div>
+
+          <!-- Achievement 3 -->
+          <div class="achievement-card-box">
+            <div class="trophy-badge-icon">🥈</div>
+            <div class="achievement-text-content">
+              <div class="achievement-rank-pill">2nd Place</div>
+              <h4 class="achievement-title">Inceptions Ideathon — NIT Goa</h4>
+              <p class="achievement-desc">Awarded 2nd Place for innovative problem-solving and idea presentation.</p>
+            </div>
+          </div>
+
+          <!-- Achievement 4 -->
+          <div class="achievement-card-box">
+            <div class="trophy-badge-icon">🏆</div>
+            <div class="achievement-text-content">
+              <div class="achievement-rank-pill">Winner</div>
+              <h4 class="achievement-title">Lenovo Leap Hackathon</h4>
+              <p class="achievement-desc">Winner for technical innovation and algorithmic problem-solving.</p>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="resume-section-divider"></div>
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         11. CONTACT & DIRECT MESSAGE SECTION
+         ========================================================================= -->
+    <section class="resume-section-container" id="contact" style="padding-bottom: 90px;">
+      <div class="resume-content-wrap">
+        
+        <span class="highlighter-badge">Get In Touch</span>
+
+        <div class="contact-section-split">
+          
+          <!-- Left Column: Direct Info & Social Connect -->
+          <div class="contact-left-info-card">
+            <h3 class="contact-heading">Let's Connect</h3>
+            <p class="contact-subtext">
+              Have a project in mind, an inquiry about VLSI design, or want to collaborate on innovative hardware &amp; AI solutions? Write a message and I'll get back to you!
+            </p>
+
+            <div class="contact-direct-links">
+              <div class="contact-direct-item">
+                <div class="direct-icon-circle"><i class="fa-solid fa-envelope"></i></div>
+                <div>
+                  <span class="direct-label">Email Me</span>
+                  <a href="mailto:shivamkumardubey71@gmail.com" class="direct-val">shivamkumardubey71@gmail.com</a>
+                </div>
+              </div>
+
+              <div class="contact-direct-item">
+                <div class="direct-icon-circle"><i class="fa-solid fa-phone"></i></div>
+                <div>
+                  <span class="direct-label">Call / WhatsApp</span>
+                  <a href="tel:+919175704438" class="direct-val">+91 9175704438</a>
+                </div>
+              </div>
+
+              <div class="contact-direct-item">
+                <div class="direct-icon-circle"><i class="fa-solid fa-location-dot"></i></div>
+                <div>
+                  <span class="direct-label">Location</span>
+                  <span class="direct-val">Goa, India</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Column: Interactive Write a Message Form -->
+          <div class="contact-form-card">
+            <h4 class="form-title">Send a Direct Message</h4>
+            
+            <form id="contact-form" class="contact-form-element">
+              <!-- Web3Forms Access Key & Configuration -->
+              <input type="hidden" name="access_key" value="035c51db-89ae-43c1-92c4-411fed9ed9df">
+              <input type="hidden" name="from_name" value="Shivam Dubey Portfolio">
+              <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
+
+              <div class="form-group-row">
+                <div class="form-field-wrapper">
+                  <label for="contact-name" class="form-label">Your Name</label>
+                  <div class="input-with-icon">
+                    <i class="fa-regular fa-user form-input-icon"></i>
+                    <input type="text" id="contact-name" name="name" class="form-input" placeholder="e.g. John Doe" required>
+                  </div>
+                </div>
+
+                <div class="form-field-wrapper">
+                  <label for="contact-email" class="form-label">Your Email</label>
+                  <div class="input-with-icon">
+                    <i class="fa-regular fa-envelope form-input-icon"></i>
+                    <input type="email" id="contact-email" name="email" class="form-input" placeholder="e.g. john@example.com" required>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-field-wrapper">
+                <label for="contact-subject" class="form-label">Subject</label>
+                <div class="input-with-icon">
+                  <i class="fa-solid fa-tag form-input-icon"></i>
+                  <input type="text" id="contact-subject" name="subject" class="form-input" placeholder="e.g. VLSI Project / Collaboration Inquiry" required>
+                </div>
+              </div>
+
+              <div class="form-field-wrapper">
+                <label for="contact-message" class="form-label">Your Message</label>
+                <div class="input-with-icon textarea-icon-align">
+                  <i class="fa-regular fa-comment-dots form-input-icon"></i>
+                  <textarea id="contact-message" name="message" class="form-textarea" rows="4" placeholder="Write your message here..." required></textarea>
+                </div>
+              </div>
+
+              <button type="submit" class="btn-send-message" id="btn-send-msg">
+                <i class="fa-regular fa-paper-plane"></i>
+                <span>Send Message</span>
+              </button>
+
+              <div class="form-status-msg" id="form-status" style="display: none;"></div>
+            </form>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+  <!-- =========================================================================
+       12. INTERACTIVE RESUME PDF VIEWER MODAL
+       ========================================================================= -->
+  <div class="resume-modal-backdrop" id="resume-modal" aria-hidden="true" role="dialog">
+    <div class="resume-modal-dialog">
+      
+      <!-- Modal Header -->
+      <div class="resume-modal-header">
+        <div class="modal-title-wrap">
+          <span class="modal-pdf-badge"><i class="fa-solid fa-file-lines"></i> PDF</span>
+          <h3 class="modal-title-text">Shivam Dubey — Resume</h3>
+        </div>
+
+        <div class="modal-header-actions">
+          <a href="assets/resume/Shivam_Dubey_Resume.pdf" download="Shivam_Dubey_Resume.pdf" class="btn-modal-action btn-modal-download" title="Download Resume PDF">
+            <i class="fa-solid fa-download"></i>
+            <span>Download PDF</span>
+          </a>
+          <a href="assets/resume/Shivam_Dubey_Resume.pdf" target="_blank" rel="noopener noreferrer" class="btn-modal-action btn-modal-external" title="Open in New Tab">
+            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+          </a>
+          <button type="button" class="btn-modal-close" id="btn-close-resume-modal" aria-label="Close Resume Viewer" title="Close Viewer">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Modal Body (Embedded PDF Viewer) -->
+      <div class="resume-modal-body">
+        <iframe src="assets/resume/Shivam_Dubey_Resume.pdf#toolbar=1" class="resume-pdf-frame" title="Shivam Dubey Resume PDF" id="resume-pdf-iframe"></iframe>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/intro-typewriter.js?v=3.8"></script>
+  <script src="js/resume-renderer.js?v=3.8"></script>
+  <script src="js/main.js?v=3.8"></script>
+</body>
+</html>
