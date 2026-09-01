@@ -1,8 +1,9 @@
 /**
  * =========================================================================
- * Clean IEEE GEC Style Typewriter Intro Animation
+ * Dynamic Moving-Cursor Typewriter Intro Animation
  * - Interactive mouse spotlight radial gradient
- * - Smooth character typewriter reveal with blinking cursor
+ * - Orange glowing cursor is attached immediately after newly typed letters
+ * - Cursor advances smoothly letter-by-letter as words are typed
  * - Clean automatic dissolve transition into the hero portfolio page
  * =========================================================================
  */
@@ -26,7 +27,7 @@
 
   window.addEventListener('mousemove', onMouseMove, { passive: true });
 
-  // 2. Typewriter Words Configuration ("welcome to my portfolio")
+  // 2. Typewriter Words Configuration ("Welcome to my portfolio")
   const wordsConfig = [
     { text: "Welcome", class: "word-light" },
     { text: "to", class: "word-light" },
@@ -35,47 +36,63 @@
   ];
 
   container.innerHTML = '';
-  const allChars = [];
 
-  wordsConfig.forEach((wordObj, wIdx) => {
-    const wordSpan = document.createElement('span');
-    wordSpan.className = 'typewriter-word ' + wordObj.class;
-
-    for (let i = 0; i < wordObj.text.length; i++) {
-      const charSpan = document.createElement('span');
-      charSpan.className = 'typewriter-char';
-      charSpan.textContent = wordObj.text[i];
-      wordSpan.appendChild(charSpan);
-      allChars.push(charSpan);
-    }
-
-    container.appendChild(wordSpan);
-
-    // Add space between words if not last
-    if (wIdx < wordsConfig.length - 1) {
-      const space = document.createElement('span');
-      space.innerHTML = '&nbsp;';
-      container.appendChild(space);
-    }
-  });
-
-  // Blinking Cursor
+  // 3. Create the glowing orange cursor line
   const cursor = document.createElement('span');
   cursor.className = 'typewriter-cursor';
   container.appendChild(cursor);
 
-  // Animate Typing
-  let currentIdx = 0;
-  const charDelay = 70; // ms per character
+  let wordIdx = 0;
+  let charIdx = 0;
+  let currentWordSpan = null;
 
-  function typeNext() {
-    if (currentIdx < allChars.length) {
-      allChars[currentIdx].classList.add('revealed');
-      currentIdx++;
-      setTimeout(typeNext, charDelay);
-    } else {
-      // Completed: Pause 1.2s then smoothly dissolve into main page
+  const charSpeed = 65;   // ms per character
+  const spaceSpeed = 110; // ms pause at word boundary
+
+  function typeNextCharacter() {
+    if (wordIdx >= wordsConfig.length) {
+      // Completed all words: keep cursor blinking for 1.2s then smoothly dissolve
       setTimeout(revealHero, 1200);
+      return;
+    }
+
+    const currentWordObj = wordsConfig[wordIdx];
+
+    // If starting a new word, create its word wrapper span
+    if (charIdx === 0) {
+      currentWordSpan = document.createElement('span');
+      currentWordSpan.className = 'typewriter-word ' + currentWordObj.class;
+      container.insertBefore(currentWordSpan, cursor);
+    }
+
+    // Append new character to the current word
+    const charSpan = document.createElement('span');
+    charSpan.className = 'typewriter-char';
+    charSpan.textContent = currentWordObj.text[charIdx];
+    currentWordSpan.appendChild(charSpan);
+
+    // Keep cursor directly following the current word / character
+    container.insertBefore(cursor, currentWordSpan.nextSibling);
+
+    charIdx++;
+
+    // Word completed?
+    if (charIdx >= currentWordObj.text.length) {
+      wordIdx++;
+      charIdx = 0;
+
+      // If not the last word, insert a space and advance cursor
+      if (wordIdx < wordsConfig.length) {
+        const space = document.createElement('span');
+        space.className = 'typewriter-space';
+        space.innerHTML = '&nbsp;';
+        container.insertBefore(space, cursor);
+        setTimeout(typeNextCharacter, spaceSpeed);
+      } else {
+        setTimeout(typeNextCharacter, charSpeed);
+      }
+    } else {
+      setTimeout(typeNextCharacter, charSpeed);
     }
   }
 
@@ -88,6 +105,6 @@
     }, 800);
   }
 
-  // Start typing after initial pause
-  setTimeout(typeNext, 300);
+  // Start typing after initial smooth delay
+  setTimeout(typeNextCharacter, 350);
 })();
