@@ -18,7 +18,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
   <!-- Main Stylesheet -->
-  <link rel="stylesheet" href="css/style.css?v=4.2">
+  <link rel="stylesheet" href="css/style.css?v=4.4">
 
   <!-- Three.js & GSAP for 3D Intro Animation -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
@@ -74,10 +74,10 @@
           <i class="fa-regular fa-sun icon-sun"></i>
         </button>
 
-        <!-- View Resume Button (Orange Pill with PDF Icon) -->
+        <!-- View Resume Button (Orange Pill showing Resume text) -->
         <button type="button" class="btn-download-resume" id="btn-view-resume" aria-label="View Resume" title="View Resume">
-          <i class="fa-regular fa-file-pdf"></i>
-          <span>View Resume</span>
+          <i class="fa-solid fa-file-lines"></i>
+          <span>Resume</span>
         </button>
 
         <!-- Mobile Menu Toggle -->
@@ -772,17 +772,14 @@
       <!-- Modal Header -->
       <div class="resume-modal-header">
         <div class="modal-title-wrap">
-          <span class="modal-pdf-badge"><i class="fa-solid fa-file-lines"></i> PDF</span>
+          <span class="modal-pdf-badge"><i class="fa-solid fa-file-lines"></i> Resume</span>
           <h3 class="modal-title-text">Shivam Dubey — Resume</h3>
         </div>
 
         <div class="modal-header-actions">
-          <a href="assets/resume/Shivam_Dubey_Resume.pdf" download="Shivam_Dubey_Resume.pdf" class="btn-modal-action btn-modal-download" title="Download Resume PDF">
-            <i class="fa-solid fa-download"></i>
-            <span>Download PDF</span>
-          </a>
           <a href="assets/resume/Shivam_Dubey_Resume.pdf" target="_blank" rel="noopener noreferrer" class="btn-modal-action btn-modal-external" title="Open in New Tab">
             <i class="fa-solid fa-arrow-up-right-from-square"></i>
+            <span>Open in New Tab</span>
           </a>
           <button type="button" class="btn-modal-close" id="btn-close-resume-modal" aria-label="Close Resume Viewer" title="Close Viewer">
             <i class="fa-solid fa-xmark"></i>
@@ -792,15 +789,15 @@
 
       <!-- Modal Body (Embedded PDF Viewer) -->
       <div class="resume-modal-body">
-        <iframe src="assets/resume/Shivam_Dubey_Resume.pdf#toolbar=1" class="resume-pdf-frame" title="Shivam Dubey Resume PDF" id="resume-pdf-iframe"></iframe>
+        <iframe src="assets/resume/Shivam_Dubey_Resume.pdf#toolbar=0" class="resume-pdf-frame" title="Shivam Dubey Resume PDF" id="resume-pdf-iframe"></iframe>
       </div>
 
     </div>
   </div>
 
   <!-- Scripts -->
-  <script src="js/intro-typewriter.js?v=3.8"></script>
-  <script src="js/resume-renderer.js?v=3.8"></script>
-  <script src="js/main.js?v=3.8"></script>
+  <script src="js/intro-typewriter.js?v=4.4"></script>
+  <script src="js/resume-renderer.js?v=4.4"></script>
+  <script src="js/main.js?v=4.4"></script>
 </body>
 </html>

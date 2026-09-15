@@ -113,6 +113,19 @@ const server = http.createServer((req, res) => {
   });
 });
 
-server.listen(PORT, () => {
-  console.log(`🚀 Portfolio server running smoothly at http://localhost:${PORT}`);
-});
+function startServer(port) {
+  const s = server.listen(port, () => {
+    console.log(`🚀 Portfolio server running smoothly at http://localhost:${port}`);
+  });
+
+  s.once('error', (err) => {
+    if (err.code === 'EADDRINUSE') {
+      console.log(`⚠️ Port ${port} is busy, trying port ${port + 1}...`);
+      startServer(port + 1);
+    } else {
+      console.error('Server error:', err);
+    }
+  });
+}
+
+startServer(PORT);
